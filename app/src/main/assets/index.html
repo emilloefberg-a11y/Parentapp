@@ -335,6 +335,9 @@ table.cmp{border-collapse:collapse;min-width:100%;font-size:.92rem}
 .typesel button[aria-pressed="true"]{border-color:var(--blue);background:var(--sky);color:var(--primary)}
 
 /* Toast */
+.demo-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0 2px;padding:8px 8px 8px 14px;border-radius:14px;background:var(--peach-soft);color:var(--text);font-size:.9rem}
+.demo-bar .btn{min-height:38px;flex:none}
+.demo-bar + .top{margin-top:4px}
 #toast{position:fixed;z-index:40;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;pointer-events:none;display:flex;align-items:center;gap:14px;padding:12px 14px 12px 18px;border-radius:16px;background:var(--navy);color:var(--bg);font-weight:600;transition:all .25s;max-width:calc(100% - 32px)}
 #toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
 #toast button{color:var(--sky);font-weight:800;padding:6px 8px}
@@ -975,7 +978,8 @@ function loadState(){
   return blankState();
 }
 function persist(){
-  try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){}
+  /* Exempelfamiljen sparas aldrig – den lever bara tills man avslutar exempelläget */
+  if(!S.demo){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
   UI.pulse = true;
   const el = document.getElementById('savedFlag'); if(el){ el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse'); }
 }
@@ -983,7 +987,7 @@ function uid(p){ return p + Date.now().toString(36) + Math.random().toString(36)
 
 function demoState(){
   const s = blankState();
-  s.onboarded = true; s.parent = 'Anna';
+  s.onboarded = true; s.parent = 'Anna'; s.demo = true;
   s.children = [
     {id:'elsa', name:'Elsa', type:'born', date:'2026-02-20'},
     {id:'leo', name:'Leo', type:'born', date:'2022-05-11'}];
@@ -1516,10 +1520,12 @@ V.profile = () => {
       <button class="btn line block" data-go="childForm">${icon('plus',20)} Lägg till barn</button></section>
     <section class="stack"><h2>Om innehållet</h2><div class="note"><span>📘</span><span>Informationen om hälsa, graviditet, amning, mat och säkerhet bygger på svenska källor som <b>1177, Livsmedelsverket, Socialstyrelsen, Konsumentverket och Transportstyrelsen</b>. Varje artikel visar sin källa. Appen ställer inga diagnoser.</span></div></section>
     <section class="stack"><h2>Inställningar</h2>
+      ${S.demo ? `<div class="note"><span>👀</span><span><b>Du tittar på en exempelfamilj.</b> Inget av det du ändrar sparas. Avsluta för att lägga till din egen familj.</span></div>
+      <button class="btn block" data-act="exitDemo">Avsluta exempelläget</button>` : `
       <div class="list">${row({e:'👋', t:'Visa introduktionen igen', go:'onboardingAgain'})}</div>
       ${UI.confirmReset ? `<div class="confirm"><b>Rensa all data?</b><span class="small">Barn, checklistor och markeringar tas bort från den här enheten. Det går inte att ångra.</span><div style="display:flex;gap:8px"><button class="btn sm danger" data-act="resetAll">Ja, rensa</button><button class="btn sm ghost" data-act="cancelReset">Avbryt</button></div></div>`
         : `<button class="btn ghost block" data-act="askReset">Rensa all data</button>`}
-      <p class="muted small">Dina uppgifter sparas bara på den här telefonen.</p>
+      <p class="muted small">Dina uppgifter sparas bara på den här telefonen.</p>`}
     </section>
   </div>`;
 };
@@ -1558,7 +1564,7 @@ function onboarding(){
       <div class="vp-i"><span class="ico">✅</span><div class="row-b"><span class="row-t">Checklistor du kan göra till dina egna</span><span class="row-s">BB-väskan, barnsäkring, flytta hemifrån</span></div></div>
       <div class="vp-i"><span class="ico">📘</span><div class="row-b"><span class="row-t">Lugn information med tydliga källor</span><span class="row-s">1177, Livsmedelsverket och andra svenska myndigheter</span></div></div>
     </div>
-    <div class="stack"><button class="btn block" data-act="obNext">Kom igång</button><button class="btn ghost block" data-act="obDemo">Titta runt med en exempelfamilj</button></div>
+    <div class="stack"><button class="btn block" data-act="obNext">Kom igång</button><button class="btn ghost block" data-act="obDemo">Titta runt med en exempelfamilj</button><p class="hint" style="text-align:center">Inget sparas i exempelläget. Du kan avsluta när du vill.</p></div>
   </div>`;
   if(UI.ob===1) return `<div class="ob-wrap view">
     <div class="stack-s">${dots(0)}<span class="eyebrow" style="margin-top:14px">Steg 1 av 2</span><h1>Vad heter du?</h1><p class="lead">Så kan vi hälsa på dig. Du kan hoppa över det här.</p></div>
@@ -1587,7 +1593,8 @@ function render(scrollTop){
   if(ob){ view.innerHTML = onboarding(); window.scrollTo(0,0); return; }
   const cur = stack[stack.length-1];
   const fn = V[cur.r] || V.home;
-  view.innerHTML = fn(cur);
+  const demoBar = S.demo ? `<div class="demo-bar" role="status"><span>👀 <b>Exempelfamilj</b> · inget sparas</span><button class="btn sm" data-act="exitDemo">Avsluta</button></div>` : '';
+  view.innerHTML = demoBar + fn(cur);
   UI.pulse = false;
   const root = stack[0].r;
   document.querySelectorAll('.tab').forEach(t=>{ if(t.dataset.tab===root) t.setAttribute('aria-current','page'); else t.removeAttribute('aria-current'); });
@@ -1671,10 +1678,26 @@ function handleAct(a, el){
     case 'resetAll': S = blankState(); try{localStorage.removeItem(KEY)}catch(e){} UI.confirmReset=false; UI.ob=0; stack=[{r:'home'}]; render(true); break;
     case 'obNext': UI.ob = 1; render(true); break;
     case 'obBack': UI.ob = Math.max(0, UI.ob-1); UI.err=''; render(true); break;
-    case 'obDemo': S = demoState(); persist(); stack=[{r:'home'}]; render(true); toast('Du tittar på exempelfamiljen Anna, Elsa och Leo'); break;
+    case 'obDemo': S = demoState(); stack=[{r:'home'}]; render(true); toast('Exempelläge – tryck Avsluta för att börja på riktigt'); break;
+    case 'exitDemo': exitDemo(); break;
     case 'obDone': S.onboarded = true; persist(); stack=[{r:'home'}]; render(true); break;
   }
 }
+function exitDemo(){
+  S = loadState(); UI.ob = 0; UI.sel = {}; UI.needs = {}; UI.edit = {}; UI.q = '';
+  stack = [{r:'home'}]; render(true);
+}
+/* Telefonens tillbaka-knapp (Android). true = hanterat i appen, false = stäng appen */
+let lastBackAt = 0;
+window.appBack = function(){
+  if(!S.onboarded){ if(UI.ob>0 && UI.ob<3){ UI.ob--; UI.err=''; render(true); return true; } return false; }
+  if(stack.length>1){ back(); return true; }
+  if(stack[0].r!=='home'){ stack=[{r:'home'}]; render(true); return true; }
+  if(S.demo){ exitDemo(); return true; }
+  const now = Date.now();
+  if(now - lastBackAt < 2000) return false;
+  lastBackAt = now; toast('Tryck tillbaka igen för att stänga appen'); return true;
+};
 function rerenderAny(){ if(!S.onboarded){ view.innerHTML = onboarding(); } else rerender(); }
 
 document.addEventListener('submit', e=>{
@@ -1714,13 +1737,6 @@ document.addEventListener('change', e=>{
 });
 document.addEventListener('keydown', e=>{ if(e.key==='Enter' && e.target.dataset && e.target.dataset.edit){ e.preventDefault(); e.target.blur(); } });
 
-/* Android: telefonens tillbaka-knapp */
-window.appBack = function(){
-  if(!S.onboarded){ if(UI.ob>0 && UI.ob<3){ UI.ob--; UI.err=''; render(true); return true; } return false; }
-  if(stack.length>1){ back(); return true; }
-  if(stack[0].r!=='home'){ stack=[{r:'home'}]; render(true); return true; }
-  return false;
-};
 render(true);
 </script>
 
