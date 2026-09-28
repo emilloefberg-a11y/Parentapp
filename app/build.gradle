@@ -1,0 +1,49 @@
+plugins {
+    id 'com.android.application'
+}
+
+def buildNumber = (System.getenv('GITHUB_RUN_NUMBER') ?: '1').toInteger()
+
+android {
+    namespace 'se.hjalpenforalder.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'se.hjalpenforalder.app'
+        minSdk 26
+        targetSdk 34
+        versionCode buildNumber
+        versionName "0.1.${buildNumber}"
+    }
+
+    // Testnyckel: samma nyckel varje bygge, så att nya testversioner kan installeras ovanpå gamla.
+    // Byt till en egen, hemlig nyckel innan appen publiceras på Google Play.
+    signingConfigs {
+        test {
+            storeFile file('test.keystore')
+            storePassword 'hjalptest'
+            keyAlias 'hjalp'
+            keyPassword 'hjalptest'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.test
+        }
+        debug {
+            signingConfig signingConfigs.test
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}

@@ -1,0 +1,1728 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>Hjälp en förälder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Manrope:wght@600;700;800&display=swap">
+<style>
+/* Layout: mobilförst app-skal – en lugn kolumn (max 640px) med bottennavigering; på desktop blir navigeringen en vänsterspalt. */
+:root{
+  --blue:#4A90C2;          /* varumärkesblå – ytor, ikoner, dekor */
+  --primary:#2B6C9C;       /* djupare blå för knappar & länkar (AA-kontrast mot vitt) */
+  --on-primary:#FFFFFF;
+  --navy:#173B57;
+  --sky:#DCEFF8;
+  --bg:#FAFCFD;
+  --surface:#FFFFFF;
+  --surface-2:#F0F6FA;
+  --line:#E2EBF1;
+  --line-strong:#B9CCDA;
+  --text:#173B57;
+  --muted:#557087;
+  --green:#6FAF8F; --green-ink:#2C6E4E; --green-soft:#E5F3EB;
+  --peach:#F4A77B; --peach-ink:#9A4B22; --peach-soft:#FDEEE4;
+  --red-ink:#A33636; --red-soft:#FBEDED; --red-line:#F0CACA;
+  --t-grav:#ECEAF8; --t-01:#DCEFF8; --t-15:#E3F2EA; --t-69:#FCEBDF; --t-1012:#DEF0EF; --t-1315:#F5E6EC; --t-1618:#E5EAF3;
+  --nav-bg:rgba(255,255,255,.92);
+  --shadow:0 1px 2px rgba(23,59,87,.05),0 8px 24px rgba(23,59,87,.06);
+  --focus:#4A90C2;
+  --f-display:"Manrope",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-body:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r-lg:22px; --r-md:16px; --r-sm:12px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --blue:#6FAEDC; --primary:#7DB9E6; --on-primary:#0C1A25; --navy:#E4EDF4; --sky:#1A3346;
+  --bg:#0C1822; --surface:#12212D; --surface-2:#182B3A; --line:#223747; --line-strong:#3A5468;
+  --text:#E4EDF4; --muted:#9DB3C4;
+  --green-ink:#8FD2AE; --green-soft:#17332A; --peach-ink:#F5B993; --peach-soft:#36271D;
+  --red-ink:#F2A3A3; --red-soft:#3A1E22; --red-line:#5C2E33;
+  --t-grav:#25293F; --t-01:#1A3346; --t-15:#1B362B; --t-69:#3A2A20; --t-1012:#193636; --t-1315:#36232C; --t-1618:#212B3B;
+  --nav-bg:rgba(18,33,45,.92); --shadow:0 1px 2px rgba(0,0,0,.3); --focus:#7DB9E6; color-scheme:dark }
+}
+:root[data-theme="dark"]{
+  --blue:#6FAEDC; --primary:#7DB9E6; --on-primary:#0C1A25; --navy:#E4EDF4; --sky:#1A3346;
+  --bg:#0C1822; --surface:#12212D; --surface-2:#182B3A; --line:#223747; --line-strong:#3A5468;
+  --text:#E4EDF4; --muted:#9DB3C4;
+  --green-ink:#8FD2AE; --green-soft:#17332A; --peach-ink:#F5B993; --peach-soft:#36271D;
+  --red-ink:#F2A3A3; --red-soft:#3A1E22; --red-line:#5C2E33;
+  --t-grav:#25293F; --t-01:#1A3346; --t-15:#1B362B; --t-69:#3A2A20; --t-1012:#193636; --t-1315:#36232C; --t-1618:#212B3B;
+  --nav-bg:rgba(18,33,45,.92); --shadow:0 1px 2px rgba(0,0,0,.3); --focus:#7DB9E6; color-scheme:dark }
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-align:left}
+input,select{font:inherit;color:inherit}
+a{color:var(--primary)}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:1.85rem;line-height:1.15;font-weight:800}
+h2{font-size:1.25rem;line-height:1.25;font-weight:750}
+h3{font-size:1.05rem;line-height:1.3;font-weight:700}
+p{margin:0}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:10px}
+.i{flex:none;display:block}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* App shell */
+#app{min-height:100%}
+main{max-width:640px;margin:0 auto;padding-inline:16px;padding-block:0 calc(104px + env(safe-area-inset-bottom,0px))}
+.view{display:flex;flex-direction:column;gap:28px;padding-top:12px;animation:enter .22s ease-out}
+@keyframes enter{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.tabbar{position:fixed;z-index:20;left:0;right:0;bottom:0;display:grid;grid-template-columns:repeat(5,1fr);padding:6px 6px calc(8px + env(safe-area-inset-bottom,0px));background:var(--nav-bg);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+.tab{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.75rem;font-weight:600;color:var(--muted);padding:4px 0;min-height:52px;justify-content:center;text-align:center}
+.tab .pill{display:grid;place-items:center;width:56px;height:30px;border-radius:999px;transition:background .2s}
+.tab[aria-current="page"]{color:var(--primary)}
+.tab[aria-current="page"] .pill{background:var(--sky)}
+.brand-rail{display:none}
+body.ob .tabbar{display:none}
+body.ob main{padding-bottom:32px}
+
+@media (min-width:900px){
+  #app{display:grid;grid-template-columns:260px 1fr}
+  .tabbar{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px;padding:28px 16px;border-top:0;border-right:1px solid var(--line);backdrop-filter:none;background:var(--surface)}
+  .brand-rail{display:flex;align-items:center;gap:10px;padding:0 10px 22px;font-family:var(--f-display);font-weight:800;font-size:1.05rem}
+  .tab{flex-direction:row;justify-content:flex-start;gap:10px;font-size:.98rem;padding:6px 8px;min-height:48px;border-radius:14px}
+  .tab .pill{width:40px;height:34px}
+  .tab[aria-current="page"]{background:var(--sky)}
+  .tab[aria-current="page"] .pill{background:transparent}
+  main{max-width:720px;padding-bottom:64px}
+  body.ob #app{display:block}
+  body.ob .tabbar{display:none}
+}
+
+/* Top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;display:flex;align-items:center;gap:8px;margin-inline:-16px;padding:10px 12px;background:var(--nav-bg);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent}
+.top-t{flex:1;min-width:0;font-weight:700;font-size:.98rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
+.icon-btn{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;color:var(--text)}
+.icon-btn:hover{background:var(--surface-2)}
+.back{display:flex;align-items:center;gap:2px;height:44px;padding:0 10px 0 4px;border-radius:14px;font-weight:600;color:var(--primary);max-width:40%;white-space:nowrap;overflow:hidden}
+.back span{overflow:hidden;text-overflow:ellipsis}
+.back:hover{background:var(--surface-2)}
+.spacer44{width:44px;flex:none}
+
+/* Headings / text */
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.crumb{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.85rem;color:var(--muted);font-weight:600}
+.crumb button{color:var(--primary);font-weight:600}
+.lead{font-size:1.08rem;color:var(--muted);line-height:1.55;max-width:62ch}
+.muted{color:var(--muted)}
+.small{font-size:.88rem}
+.stack{display:flex;flex-direction:column;gap:12px}
+.stack-s{display:flex;flex-direction:column;gap:8px}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.sec-h .link{font-weight:600;font-size:.92rem;color:var(--primary)}
+
+/* Cards & rows */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow)}
+.list{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden}
+.row{display:flex;align-items:center;gap:14px;width:100%;padding:14px 16px;min-height:64px;text-decoration:none;color:inherit}
+.list > .row + .row, .list > * + .row{border-top:1px solid var(--line)}
+.row:hover{background:var(--surface-2)}
+.row-b{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.row-t{font-weight:650;line-height:1.3}
+.row-s{font-size:.88rem;color:var(--muted);line-height:1.4}
+.chev{color:var(--line-strong)}
+.ico{flex:none;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:1.3rem;background:var(--surface-2)}
+.ico.sm{width:36px;height:36px;border-radius:11px;font-size:1.05rem}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:.74rem;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--sky);color:var(--primary);white-space:nowrap}
+.badge.green{background:var(--green-soft);color:var(--green-ink)}
+.badge.peach{background:var(--peach-soft);color:var(--peach-ink)}
+.badge.grey{background:var(--surface-2);color:var(--muted)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 22px;border-radius:15px;background:var(--primary);color:var(--on-primary);font-weight:700;text-align:center;text-decoration:none}
+.btn:hover{filter:brightness(1.06)}
+.btn.block{width:100%}
+.btn.ghost{background:var(--surface-2);color:var(--text)}
+.btn.line{background:transparent;border:1.5px solid var(--line-strong);color:var(--text)}
+.btn.sm{min-height:40px;padding:0 14px;border-radius:12px;font-size:.92rem}
+.btn.danger{background:var(--red-soft);color:var(--red-ink)}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font-weight:600;font-size:.92rem;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--sky);border-color:var(--blue);color:var(--primary)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.scroll-x{display:flex;gap:8px;overflow-x:auto;margin-inline:-16px;padding:2px 16px 6px;scrollbar-width:none}
+.scroll-x::-webkit-scrollbar{display:none}
+
+/* Home */
+.home-top{display:flex;align-items:center;justify-content:space-between;padding-top:8px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--f-display);font-weight:800;font-size:1rem}
+.avatar{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--sky);color:var(--primary);font-weight:800;font-family:var(--f-display)}
+.hello{display:flex;flex-direction:column;gap:6px}
+.kids{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding:0 16px}
+.kid{display:flex;align-items:center;gap:8px;padding:6px 14px 6px 6px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);font-weight:650;white-space:nowrap;min-height:44px}
+.kid .dot{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);font-size:.95rem}
+.kid[aria-pressed="true"]{border-color:var(--blue);background:var(--sky);color:var(--primary)}
+.hero{border-radius:26px;padding:22px 20px 18px;display:flex;flex-direction:column;gap:16px;background:var(--t-01)}
+.hero-h{display:flex;gap:14px;align-items:center}
+.hero-h .ico{background:var(--surface);width:52px;height:52px;border-radius:16px;font-size:1.6rem}
+.hero-name{font-family:var(--f-display);font-size:1.4rem;font-weight:800;line-height:1.15}
+.now{display:flex;flex-direction:column;background:var(--surface);border-radius:18px;overflow:hidden}
+.now .row{min-height:58px;padding:12px 14px}
+.now .row + .row{border-top:1px solid var(--line)}
+.now .row-t{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+.now .row-s{color:var(--text);font-size:.95rem}
+.searchbar{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:0 18px;border-radius:18px;background:var(--surface);border:1.5px solid var(--line);color:var(--muted);box-shadow:var(--shadow)}
+.searchbar:hover{border-color:var(--line-strong)}
+.helpbtn{display:flex;align-items:center;gap:16px;width:100%;padding:18px;border-radius:var(--r-lg);background:var(--peach-soft);color:var(--text)}
+.helpbtn .ico{background:var(--surface);width:52px;height:52px;font-size:1.5rem}
+.helpbtn b{font-family:var(--f-display);font-size:1.15rem;font-weight:800;display:block}
+.quick{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.qbtn{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:6px;padding:14px 4px 12px;border-radius:18px;background:var(--surface);border:1px solid var(--line);font-weight:650;font-size:.78rem;text-align:center;min-height:88px;line-height:1.2;min-width:0;overflow-wrap:anywhere}
+.meta .badge{white-space:normal}
+.qbtn span.e{font-size:1.5rem}
+.qbtn:hover{border-color:var(--line-strong)}
+.todo{display:flex;align-items:center;gap:12px;padding:12px 14px;min-height:64px}
+.list > .todo + .todo{border-top:1px solid var(--line)}
+.todo .row-b{cursor:pointer}
+.todo.done .row-t{text-decoration:line-through;color:var(--muted)}
+
+/* Progress */
+.prog{height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.prog > i{display:block;height:100%;background:var(--blue);border-radius:99px;transition:width .3s}
+.prog.done > i{background:var(--green)}
+.lcard{display:flex;flex-direction:column;gap:10px;padding:16px;width:100%}
+.lcard-h{display:flex;align-items:center;gap:12px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+
+/* Section pages */
+.shero{border-radius:26px;padding:22px 20px;display:flex;flex-direction:column;gap:10px}
+.seg{display:flex;gap:4px;padding:4px;border-radius:16px;background:var(--surface-2);overflow-x:auto;scrollbar-width:none}
+.seg button{flex:1;min-height:42px;padding:0 12px;border-radius:12px;font-weight:650;font-size:.9rem;white-space:nowrap;text-align:center;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--text);box-shadow:0 1px 3px rgba(23,59,87,.12)}
+.cats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:560px){.cats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.cat{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:16px;border-radius:20px;background:var(--surface);border:1px solid var(--line);min-height:128px}
+.cat:hover{border-color:var(--line-strong)}
+.cat .row-t{font-family:var(--f-display);font-weight:750}
+.soon{display:flex;flex-wrap:wrap;gap:8px}
+.soon span{font-size:.88rem;padding:6px 12px;border-radius:999px;background:var(--surface-2);color:var(--muted);font-weight:600}
+.note{display:flex;gap:12px;padding:14px 16px;border-radius:var(--r-md);background:var(--surface-2);font-size:.92rem;color:var(--muted);line-height:1.5}
+.note b{color:var(--text)}
+
+/* Article */
+.article{display:flex;flex-direction:column;gap:18px}
+.article h1{font-size:1.9rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.prose{display:flex;flex-direction:column;gap:14px;max-width:65ch;font-size:1.04rem;line-height:1.65}
+.prose h2{margin-top:14px;font-size:1.2rem}
+.prose ul,.prose ol{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.prose li::marker{color:var(--blue)}
+.callout{border-radius:var(--r-md);padding:16px 18px;display:flex;flex-direction:column;gap:8px;font-size:.98rem;line-height:1.55}
+.callout h3{display:flex;align-items:center;gap:8px;font-size:1rem}
+.callout ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:5px}
+.callout.ok{background:var(--green-soft)} .callout.ok h3{color:var(--green-ink)}
+.callout.care{background:var(--peach-soft)} .callout.care h3{color:var(--peach-ink)}
+.callout.sos{background:var(--red-soft);border:1px solid var(--red-line)} .callout.sos h3{color:var(--red-ink)}
+.callout.tip{background:var(--sky)}
+.callout.info{background:var(--surface-2)}
+.tl{display:flex;flex-direction:column;gap:0;margin:4px 0}
+.tl-i{display:grid;grid-template-columns:28px 1fr;gap:12px}
+.tl-dot{display:flex;flex-direction:column;align-items:center}
+.tl-dot i{width:14px;height:14px;border-radius:50%;background:var(--blue);border:3px solid var(--sky);margin-top:5px;flex:none}
+.tl-dot b{flex:1;width:2px;background:var(--line);margin:4px 0}
+.tl-i:last-child .tl-dot b{display:none}
+.tl-c{padding-bottom:18px;display:flex;flex-direction:column;gap:4px}
+.tl-c strong{font-family:var(--f-display);font-size:1.02rem}
+.sw{display:flex;flex-direction:column;gap:8px}
+.sw-i{display:flex;align-items:center;gap:12px}
+.sw-i i{width:28px;height:28px;border-radius:9px;flex:none;border:1px solid rgba(0,0,0,.08)}
+.src{display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-radius:var(--r-md);border:1px solid var(--line);font-size:.9rem;color:var(--muted)}
+.src b{color:var(--text)}
+.contacts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.contact{display:flex;flex-direction:column;gap:2px;padding:14px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--line);text-decoration:none;color:var(--text)}
+.contact strong{font-family:var(--f-display);font-size:1.35rem;font-variant-numeric:tabular-nums}
+.contact.sos strong{color:var(--red-ink)}
+.contact span{font-size:.84rem;color:var(--muted);line-height:1.35}
+
+/* Checklist */
+.cl-head{display:flex;flex-direction:column;gap:14px;padding:20px;border-radius:24px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow)}
+.cl-top{display:flex;align-items:center;gap:14px}
+.cl-count{font-variant-numeric:tabular-nums;font-weight:700}
+.cl-actions{display:flex;flex-wrap:wrap;gap:8px}
+.saved{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;color:var(--green-ink);font-weight:600;transition:opacity .3s}
+.saved.pulse{animation:pulse .8s}
+@keyframes pulse{0%{opacity:.3}100%{opacity:1}}
+.grp-h{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 4px}
+.grp-h h2{font-size:1.02rem}
+.item{display:flex;align-items:center;gap:12px;padding:10px 14px;min-height:58px}
+.list > .item + .item, .list > .item + form, .list > .empty + form{border-top:1px solid var(--line)}
+.item .tgl{display:flex;align-items:center;gap:14px;flex:1;min-width:0;min-height:44px;cursor:pointer}
+.chk{flex:none;width:28px;height:28px;border-radius:50%;border:2px solid var(--line-strong);display:grid;place-items:center;color:transparent;transition:background .15s,border-color .15s}
+.done .chk,.chk.on{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+.item .txt{flex:1;min-width:0;line-height:1.35;overflow-wrap:anywhere}
+.item.done .txt{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line-strong)}
+.item .own{font-size:.7rem}
+.edit-in{flex:1;min-width:0;min-height:44px;padding:0 12px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg)}
+.edit-in:focus{border-color:var(--blue);outline:none}
+.mini{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;color:var(--muted);flex:none}
+.mini:hover{background:var(--surface-2);color:var(--text)}
+.mini:disabled{opacity:.3;cursor:default}
+.mini.del:hover{color:var(--red-ink);background:var(--red-soft)}
+.addf{display:flex;gap:8px;padding:10px 12px}
+.addf input{flex:1;min-width:0;min-height:48px;padding:0 14px;border-radius:14px;border:1.5px dashed var(--line-strong);background:transparent}
+.addf input:focus{border-style:solid;border-color:var(--blue);outline:none;background:var(--surface)}
+.empty{padding:16px;color:var(--muted);font-size:.92rem}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-weight:650;font-size:.95rem}
+.field input{min-height:52px;padding:0 16px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface)}
+.field input:focus{border-color:var(--blue);outline:none}
+.hint{font-size:.85rem;color:var(--muted)}
+.err{font-size:.88rem;color:var(--red-ink);font-weight:600}
+.confirm{display:flex;flex-direction:column;gap:10px;padding:14px 16px;border-radius:var(--r-md);background:var(--red-soft);border:1px solid var(--red-line)}
+
+/* Compare */
+.prod{display:flex;flex-direction:column;gap:14px;padding:18px}
+.prod-h{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.prod-h .row-b{gap:2px}
+.brandname{font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.price{font-family:var(--f-display);font-weight:800;font-size:1.1rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+.specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px;margin:0}
+.specs div{display:flex;flex-direction:column;min-width:0}
+.specs dt{font-size:.78rem;color:var(--muted);font-weight:600}
+.specs dd{margin:0;font-weight:600;font-size:.94rem;overflow-wrap:anywhere}
+.pc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;font-size:.9rem}
+.pc ul{margin:4px 0 0;padding-left:1.1em;display:flex;flex-direction:column;gap:3px;color:var(--muted)}
+.pc b{font-size:.82rem}
+.match{display:flex;flex-wrap:wrap;gap:6px}
+.selbtn{display:flex;align-items:center;gap:10px;min-height:44px;font-weight:650;color:var(--primary)}
+.selbtn .chk{width:24px;height:24px}
+.cbar{position:fixed;z-index:15;left:16px;right:16px;bottom:calc(86px + env(safe-area-inset-bottom,0px));max-width:608px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:10px 10px 10px 18px;border-radius:18px;background:var(--navy);color:var(--bg);box-shadow:0 10px 30px rgba(23,59,87,.25)}
+.cbar .btn{background:var(--bg);color:var(--navy);min-height:44px}
+.cbar span{flex:1;font-weight:650}
+@media (min-width:900px){.cbar{left:276px;bottom:24px;max-width:688px}}
+.tbl-wrap{overflow-x:auto;border-radius:var(--r-lg);border:1px solid var(--line);background:var(--surface)}
+table.cmp{border-collapse:collapse;min-width:100%;font-size:.92rem}
+.cmp th,.cmp td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);min-width:150px}
+.cmp tr:last-child td,.cmp tr:last-child th{border-bottom:0}
+.cmp th[scope="row"]{position:sticky;left:0;background:var(--surface-2);font-weight:650;min-width:110px;color:var(--muted);font-size:.84rem}
+.cmp thead th{font-family:var(--f-display);font-size:1rem}
+.cmp ul{margin:0;padding-left:1em}
+
+/* Recipes */
+.rcard{display:flex;gap:14px;align-items:center;padding:14px 16px;width:100%}
+.rmeta{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+
+/* Search */
+.sfield{display:flex;align-items:center;gap:10px;min-height:56px;padding:0 16px;border-radius:18px;border:2px solid var(--blue);background:var(--surface)}
+.sfield input{flex:1;min-width:0;border:0;background:transparent;font-size:1.05rem;min-height:52px;outline:none}
+.rgrp{display:flex;flex-direction:column;gap:8px}
+
+/* Onboarding */
+.ob-wrap{min-height:100%;display:flex;flex-direction:column;gap:28px;padding-top:28px;max-width:520px;margin:0 auto}
+.ob-hero{border-radius:30px;padding:30px 24px;background:var(--sky);display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
+.ob-hero h1{font-size:2.1rem}
+.ob-art{position:absolute;right:-30px;top:-30px;width:170px;height:170px;border-radius:50%;background:var(--blue);opacity:.18}
+.ob-art.b{right:40px;top:70px;width:70px;height:70px;background:var(--peach);opacity:.35}
+.vp{display:flex;flex-direction:column;gap:14px}
+.vp-i{display:flex;gap:14px;align-items:center}
+.dots{display:flex;gap:6px}
+.dots i{width:8px;height:8px;border-radius:99px;background:var(--line-strong)}
+.dots i.on{width:24px;background:var(--primary)}
+.typesel{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.typesel button{display:flex;flex-direction:column;gap:6px;padding:16px;border-radius:18px;border:2px solid var(--line);background:var(--surface);font-weight:700}
+.typesel button span{font-size:1.5rem}
+.typesel button[aria-pressed="true"]{border-color:var(--blue);background:var(--sky);color:var(--primary)}
+
+/* Toast */
+#toast{position:fixed;z-index:40;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;pointer-events:none;display:flex;align-items:center;gap:14px;padding:12px 14px 12px 18px;border-radius:16px;background:var(--navy);color:var(--bg);font-weight:600;transition:all .25s;max-width:calc(100% - 32px)}
+#toast.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+#toast button{color:var(--sky);font-weight:800;padding:6px 8px}
+:root[data-theme="dark"] #toast button{color:var(--primary)}
+@media (min-width:900px){#toast{bottom:32px;left:calc(50% + 130px)}}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+</head>
+<body>
+<div id="app">
+  <nav class="tabbar" aria-label="Huvudmeny">
+    <div class="brand-rail"><span id="railLogo"></span>Hjälp en förälder</div>
+    <button class="tab" data-tab="home"><span class="pill" data-ic="home"></span>Hem</button>
+    <button class="tab" data-tab="explore"><span class="pill" data-ic="explore"></span>Utforska</button>
+    <button class="tab" data-tab="lists"><span class="pill" data-ic="lists"></span>Checklistor</button>
+    <button class="tab" data-tab="compare"><span class="pill" data-ic="compare"></span>Jämför</button>
+    <button class="tab" data-tab="profile"><span class="pill" data-ic="profile"></span>Profil</button>
+  </nav>
+  <main id="view" tabindex="-1"></main>
+</div>
+<div id="toast" role="status" aria-live="polite"><span id="toastMsg"></span><button id="toastAct" hidden></button></div>
+
+<script>
+/* =========================================================
+   Hjälp en förälder – prototyp (MVP)
+   Struktur: DATA → STATE → HELPERS → KOMPONENTER → VYER → ROUTER
+   ========================================================= */
+
+const ICONS = {
+  home:'<path d="M3.5 10.5 12 3.5l8.5 7V20a1 1 0 0 1-1 1H15v-6H9v6H4.5a1 1 0 0 1-1-1z"/>',
+  explore:'<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
+  lists:'<rect x="4" y="3" width="16" height="18" rx="3.5"/><path d="m8 9 1.5 1.5L12.5 7.5M8 15.5l1.5 1.5 3-3M15 9h2M15 15.5h2"/>',
+  compare:'<path d="M12 4v16M8 20h8M5 8h14M5 8l-2.5 6a2.5 2.5 0 0 0 5 0zM19 8l-2.5 6a2.5 2.5 0 0 0 5 0z"/>',
+  profile:'<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5a7.5 7.5 0 0 1 15 0"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/>',
+  back:'<path d="m14.5 18-6-6 6-6"/>',
+  chev:'<path d="m9.5 6 6 6-6 6"/>',
+  check:'<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+  up:'<path d="m6 15 6-6 6 6"/>',
+  down:'<path d="m6 9 6 6 6-6"/>',
+  trash:'<path d="M4 7h16M9 7V4.5h6V7M6.5 7l1 13h9l1-13"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  x:'<path d="M6 6l12 12M18 6 6 18"/>',
+  edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/>',
+  phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/>',
+  reset:'<path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.5M4 4v4.5h4.5"/>',
+  clock:'<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>',
+  ext:'<path d="M14 5h5v5M19 5l-8 8M18 14v5H5V6h5"/>'
+};
+const icon = (n, s=22) => `<svg class="i" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]}</svg>`;
+const LOGO = s => `<svg width="${s}" height="${s}" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="10" fill="var(--blue)"/><circle cx="13.5" cy="13" r="5.2" fill="#fff"/><circle cx="21" cy="20" r="3.6" fill="#DCEFF8"/></svg>`;
+
+/* ---------------- DATA: sektioner ---------------- */
+const SECTIONS = [
+  {id:'grav', e:'🤰', t:'Graviditet & förlossning', s:'Från plus på stickan till hemgång från BB', tint:'--t-grav'},
+  {id:'0-1', e:'👶', t:'0–1 år', s:'Spädbarnsåret, månad för månad', tint:'--t-01', periods:['0–3 mån','3–6 mån','6–9 mån','9–12 mån']},
+  {id:'1-5', e:'🧒', t:'1–5 år', s:'Vardag, språk, trots och förskola', tint:'--t-15', periods:['1 år','2 år','3 år','4 år','5 år']},
+  {id:'6-9', e:'🎒', t:'6–9 år', s:'Skolstart och yngre skolålder', tint:'--t-69'},
+  {id:'10-12', e:'🧑', t:'10–12 år', s:'Mellanstadiet och början av puberteten', tint:'--t-1012'},
+  {id:'13-15', e:'🧑‍🎤', t:'13–15 år', s:'Tonår, relationer och sociala medier', tint:'--t-1315'},
+  {id:'16-18', e:'🧑‍🎓', t:'16–18 år', s:'På väg mot vuxenlivet', tint:'--t-1618'}
+];
+const SEC = id => SECTIONS.find(s=>s.id===id);
+
+const CATS01 = [
+  {id:'utv', e:'🧠', t:'Utveckling', d:'Motorik, kommunikation, syn och hörsel'},
+  {id:'somn', e:'😴', t:'Sömn', d:'Sömnmönster, rutiner och säker sömn'},
+  {id:'mat', e:'🥕', t:'Mat', d:'Amning, ersättning och matintroduktion'},
+  {id:'lek', e:'🧸', t:'Lek & aktiviteter', d:'Magträning, sånger och sensorisk lek'},
+  {id:'halsa', e:'🩺', t:'Hälsa', d:'Feber, förkylning, gråt och tänder'},
+  {id:'hygien', e:'🧼', t:'Hygien', d:'Blöjor, bajs och hud'},
+  {id:'sak', e:'🛡️', t:'Säkerhet', d:'Säker sömn, bilstol och barnsäkring'}
+];
+
+/* Kommande ämnen per sektion – visas ärligt som "kommer snart" */
+const UPCOMING = {
+  '1-5': {byPeriod:[
+    ['Gå','Prata','Äta själv','Sömn','Tänder','Förskola','Säkerhet'],
+    ['Språk','Trots','Potträning','Sömn','Matvägran','Lek','Förskola'],
+    ['Kompisar','Känslor','Konflikter','Självständighet','Fantasilek'],
+    ['Social utveckling','Motorik','Språk','Ansvar'],
+    ['Skolförberedelse','Självständighet','Kompisrelationer','Känsloreglering']]},
+  '6-9': {cats:[['🏫','Skolan','Förskoleklass, skolstart, läxor, fritids'],['🧠','Utveckling','Läsning, skrivning, matematik, koncentration'],['❤️','Socialt','Kompisar, konflikter, mobbning, grupptryck'],['🏃','Fritid','Idrott, aktiviteter, skärmtid, gaming'],['🛡️','Säkerhet','Internet, mobil, cykel, trafik, vara hemma själv']]},
+  '10-12': {cats:[['🌱','Puberteten','Kroppsförändringar, hygien, mens'],['❤️','Relationer','Sexualitet, självkänsla, kompisar'],['📱','Skärmar','Sociala medier, gaming, skärmtid'],['📚','Skola','Läxor och motivation'],['💰','Pengar & ansvar','Veckopeng och ansvar hemma'],['😴','Sömn','Sömnbehov och rutiner']]},
+  '13-15': {cats:[['🌱','Kropp & identitet','Pubertet, mens, kroppsideal, identitet'],['❤️','Relationer','Sexualitet, kompisar, konflikter'],['📱','Skärmar','Sociala medier, gaming, pornografi, mobil'],['🧃','Alkohol, nikotin & droger','Saklig information och samtalsstöd'],['📚','Skola','Betyg och studiero'],['🏠','Hemma','Regler och överenskommelser']]},
+  '16-18': {cats:[['💰','Ekonomi','Bankkonto, budget, sparande, skatt, deklaration'],['🏠','Vuxenlivet','Tvätta, laga mat, städa, avtal, abonnemang'],['🚗','Körkort','Körkortstillstånd, övningskörning, teori, körprov'],['🎓','Framtid','Gymnasiet, universitet, YH, jobb, CV']]}
+};
+
+/* ---------------- DATA: "Just nu" per ålder ---------------- */
+const NOW01 = [
+  {dev:'Din bebis lär känna världen genom närhet, dofter och röster. Runt 6 veckor kommer ofta det första sociala leendet.', mat:'Amning eller ersättning när bebisen visar att hen är hungrig – ofta 8–12 gånger per dygn i början.', somn:'Nyfödda sover mycket men i korta pass, dygnet runt. Lägg alltid bebisen på rygg.', a:['utv-0','amning-forsta','sov-saker']},
+  {dev:'Många bebisar börjar rulla, gripa efter saker och jollra. Barn utvecklas olika snabbt.', mat:'Från ungefär 4 månader kan ni börja med smakportioner – några teskedar bredvid mjölken.', somn:'Sömnen blir ofta mer samlad på natten, men många vaknar fortfarande flera gånger.', a:['utv-1','smakportioner','somn-forsta']},
+  {dev:'Många sitter själva, börjar ta sig framåt och kan bli försiktiga med okända människor.', mat:'Dags för grövre konsistenser och mjuk plockmat som barnet kan hålla i själv.', somn:'Många sover 2–3 tupplurar om dagen. Uppvaknanden på natten är fortfarande vanliga.', a:['utv-2','smakportioner','somn-forsta']},
+  {dev:'Barnet drar sig kanske upp och går längs möbler. De första orden kan komma.', mat:'Mycket av familjens mat fungerar nu – salta lite och ge inte honung före ett år.', somn:'Många går över till 1–2 tupplurar. En likadan kvällsrutin kan göra kvällen lugnare.', a:['utv-3','smakportioner','somn-forsta']}
+];
+
+const TODOS = {
+  grav:[
+    {id:'mvc', e:'🩺', t:'Boka besök på barnmorskemottagningen', s:'Om du inte redan har gjort det', go:'article|g-ordna'},
+    {id:'forsakring', e:'🛡️', t:'Se över gravid- och barnförsäkring', s:'Många bolag har en sista vecka för att teckna', go:'article|g-forsakring'},
+    {id:'bb', e:'👜', t:'Packa BB-väskan', s:'Checklista med egna punkter', go:'list|bb'},
+    {id:'brev', e:'✍️', t:'Skriv förlossningsbrev', s:'Tips på vad du kan ta upp', go:'article|g-brev'}],
+  p0:[
+    {id:'bvc', e:'🩺', t:'BVC:s hembesök', s:'BVC hör av sig efter hemgång', go:'article|utv-0'},
+    {id:'namn', e:'📝', t:'Anmäl barnets namn', s:'Till Skatteverket inom tre månader', go:'article|g-ordna'},
+    {id:'fp', e:'💼', t:'Ansök om föräldrapenning', s:'Hos Försäkringskassan', go:'article|g-ordna'},
+    {id:'bf', e:'🛡️', t:'Teckna barnförsäkring', s:'Jämför villkor, inte bara pris', go:'article|g-forsakring'}],
+  p1:[
+    {id:'vacc35', e:'💉', t:'Vaccination vid 3 och 5 månader', s:'Görs på BVC', go:'article|utv-1'},
+    {id:'smak', e:'🥄', t:'Börja med smakportioner', s:'Från ungefär 4 månader', go:'article|smakportioner'},
+    {id:'ledig', e:'📅', t:'Planera resten av föräldraledigheten', s:'Anmäl till arbetsgivaren i god tid', go:'article|g-ordna'}],
+  p2:[
+    {id:'bvc8', e:'🩺', t:'BVC-besök', s:'Utveckling, vikt och frågor', go:'article|utv-2'},
+    {id:'kons', e:'🥕', t:'Introducera nya konsistenser', s:'Grövre mos och plockmat', go:'article|smakportioner'},
+    {id:'forskola', e:'🎒', t:'Ansök om förskoleplats', s:'Minst fyra månader innan ni behöver platsen', go:'article|forskola'},
+    {id:'sakra', e:'🛡️', t:'Barnsäkra hemmet', s:'Barnet börjar röra sig själv', go:'list|barnsakring'}],
+  p3:[
+    {id:'vacc12', e:'💉', t:'Vaccination vid 12 månader', s:'Görs på BVC', go:'article|utv-3'},
+    {id:'insk', e:'🎒', t:'Förbered inskolningen', s:'Egen checklista för förskolestarten', go:'lists'},
+    {id:'bilstol', e:'🚗', t:'Kontrollera att bilstolen passar', s:'Bakåtvänt så länge som möjligt', go:'article|bilstol'}],
+  '1-5':[
+    {id:'pott', e:'🚽', t:'Fundera på potträning', s:'När barnet visar att hen är redo', go:'article|pott'},
+    {id:'tand', e:'🦷', t:'Borsta tänderna morgon och kväll', s:'Med fluortandkräm', go:'article|tander'}],
+  '16-18':[
+    {id:'flytta', e:'🏡', t:'Gå igenom flytta hemifrån-listan', s:'Tillsammans med ditt barn', go:'list|flytta'}]
+};
+const MAYBE = {
+  grav:[['🚗','Babyskydd','compareCat|babyskydd'],['🛒','Barnvagn','compareCat|barnvagnar'],['🤱','Bärsele','compareCat|barselar']],
+  p0:[['🤱','Bärsele','compareCat|barselar'],['🛒','Barnvagn','compareCat|barnvagnar']],
+  p1:[['🪑','Matstol','compareCat|barnstolar'],['🤱','Bärsele','compareCat|barselar']],
+  p2:[['🪑','Matstol','compareCat|barnstolar'],['🛡️','Barnsäkring','list|barnsakring'],['🥣','Recept för plockmat','recipes']],
+  p3:[['🪑','Matstol','compareCat|barnstolar'],['🚗','Bilstol','compareCat|babyskydd'],['🥣','Recept','recipes']]
+};
+
+/* ---------------- DATA: artiklar ----------------
+   blocks: {p} {h} {ul} {ol} {ok} {care} {sos} {tip} {timeline} {swatch}
+   ------------------------------------------------ */
+const SRC = {
+  '1177':{n:'1177', u:'https://www.1177.se'},
+  LV:{n:'Livsmedelsverket', u:'https://www.livsmedelsverket.se'},
+  FK:{n:'Försäkringskassan', u:'https://www.forsakringskassan.se'},
+  SKV:{n:'Skatteverket', u:'https://www.skatteverket.se'},
+  KV:{n:'Konsumentverket', u:'https://www.konsumentverket.se'},
+  KF:{n:'Konsumenternas.se', u:'https://www.konsumenternas.se'},
+  TS:{n:'Transportstyrelsen', u:'https://www.transportstyrelsen.se'},
+  NTF:{n:'NTF', u:'https://ntf.se'},
+  SOS:{n:'Socialstyrelsen', u:'https://www.socialstyrelsen.se'},
+  GIC:{n:'Giftinformationscentralen', u:'https://giftinformation.se'},
+  SKOL:{n:'Skolverket', u:'https://www.skolverket.se'}
+};
+const CARE = 'Kontakta vårdcentral eller ring 1177 om';
+const DEV = [
+  {m:'Lyfter huvudet en kort stund när hen ligger på magen. Rörelserna är ofta ryckiga i början.', k:'Kommunicerar med gråt, ljud och blickar. Många börjar göra små ljud som ”ah” och ”oh”.', s:'Ser bäst på nära håll, ungefär ett ansiktes avstånd. Reagerar på ljud och känner igen din röst.', so:'Det första sociala leendet kommer ofta runt 6 veckors ålder.'},
+  {m:'Håller upp huvudet stadigt, börjar rulla och griper efter saker.', k:'Jollrar, skrattar och ”svarar” när du pratar.', s:'Följer saker med blicken och vänder sig mot ljud.', so:'Tycker om lekar med ansikten och röster, som tittut.'},
+  {m:'Sitter ofta själv, kan börja åla eller krypa. Flyttar saker mellan händerna.', k:'Jollrar med stavelser som ”ba-ba” och ”da-da”.', s:'Letar efter saker som ramlat ner och följer med blicken när du går.', so:'Kan bli försiktig med okända människor. Det är ett tecken på att barnet har knutit an till er.'},
+  {m:'Drar sig upp till stående och går längs möbler. Tar små saker med tumme och pekfinger.', k:'Förstår fler ord och säger kanske sitt första ord. Pekar för att visa något.', s:'Känner igen välbekanta personer och saker på avstånd.', so:'Tycker om turtagningslekar och att härma det du gör.'}
+];
+const ARTICLES = {};
+function A(id, o){ ARTICLES[id] = Object.assign({id, periods:[0,1,2,3]}, o); }
+
+DEV.forEach((d,i)=>A('utv-'+i,{
+  sec:'0-1', cat:'utv', periods:[i], title:'Utveckling '+SECTIONS[1].periods[i].replace('mån','månader'),
+  ingress:'Så här utvecklas många barn under den här perioden. Se det som ett ungefärligt spann – barn utvecklas olika snabbt.',
+  tags:'utveckling motorik kommunikation syn hörsel socialt kryper rullar sitter går pratar jollrar leende bvc vaccination',
+  src:['1177'],
+  blocks:[
+    {h:'Motorik'},{p:d.m},{h:'Kommunikation'},{p:d.k},{h:'Syn och hörsel'},{p:d.s},{h:'Social utveckling'},{p:d.so},
+    {ok:['Barn utvecklas olika snabbt, och vissa hoppar över steg – till exempel att krypa','Att ett barn är tidigt med en sak och senare med en annan']},
+    {care:['Du är orolig för barnets syn eller hörsel','Barnet slutar göra något som det redan har kunnat','Du undrar över något – ta gärna upp det på BVC, som följer barnets utveckling']},
+    {tip:'På BVC följer ni barnets utveckling, vikt och längd, och barnet får vaccinationer enligt det nationella programmet – bland annat vid 3, 5 och 12 månader.'}
+  ]}));
+
+A('fjarde',{sec:'0-1', cat:'utv', periods:[0], title:'Fjärde trimestern', e:'🌙',
+  ingress:'De första tre månaderna efter födseln kallas ibland fjärde trimestern. Bebisen ska vänja sig vid livet utanför magen – och du vid livet som förälder.',
+  tags:'fjärde trimestern nyfödd närhet bära gråt anpassning återhämtning nedstämd efterkontroll första veckorna',
+  src:['1177'],
+  blocks:[
+    {h:'Bebisens anpassning'},{p:'I magen var det varmt, trångt, mörkt och alltid lite gungande. Därför lugnas många bebisar av närhet, av att bli burna, av vyssjande ljud och av att höra en förälders hjärtslag.'},
+    {h:'Närhet och bärande'},{ul:['Hud mot hud och att bära bebisen nära kan lugna er båda','Det går inte att skämma bort en nyfödd med närhet','En bärsele eller bärsjal kan ge dig händerna fria']},
+    {h:'Mat, sömn och gråt'},{p:'Täta mål, korta sömnpass och perioder av gråt är vanligt de första veckorna. Många bebisar gråter som mest runt 6–8 veckors ålder, och sedan brukar det minska.'},
+    {h:'Din återhämtning'},{ul:['Blödningen efter förlossningen kan pågå i flera veckor','Ta emot hjälp och sänk kraven på hemmet','Många känner sig ledsna och känsliga de första dagarna – det brukar gå över inom ett par veckor','Efterkontrollen hos barnmorskan brukar vara några veckor efter förlossningen']},
+    {ok:['Att känna sig överväldigad, trött och osäker','Att kärleken till bebisen växer fram gradvis']},
+    {care:['Nedstämdheten håller i sig mer än två veckor eller blir värre','Du har svårt att sova även när bebisen sover','Du känner dig inte som dig själv – prata med BVC, barnmorskan eller vårdcentralen']},
+    {sos:['Du har tankar på att skada dig själv eller bebisen']}
+  ]});
+
+A('sov-saker',{sec:'0-1', cat:'sak', title:'Säker sömn för spädbarn', e:'🛏️',
+  ingress:'Några enkla råd minskar risken för plötslig spädbarnsdöd. De gäller varje gång bebisen sover – både natt och tupplur.',
+  tags:'säker sömn plötslig spädbarnsdöd rygg sova sovplats säng madrass sömn',
+  src:['1177','SOS'],
+  blocks:[
+    {h:'Råd för säker sömn'},{ul:['Lägg alltid bebisen på rygg att sova','Använd en fast, plan madrass utan kuddar, täcken eller gosedjur som kan täcka ansiktet','Låt gärna bebisen sova i egen säng i samma rum som du','Se till att bebisen inte blir för varm','Håll bebisens omgivning rökfri','Amning och napp vid insomning kan minska risken']},
+    {p:'Om bebisen somnar i vagn, bärsele eller babyskydd: se till att huvudet inte faller framåt och att näsa och mun är fria.'},
+    {tip:'Magläge när bebisen är vaken – magträning – är bra för motoriken. Det är när bebisen sover som ryggläge gäller.'}
+  ]});
+
+A('somn-forsta',{sec:'0-1', cat:'somn', title:'Sömn under första året', e:'😴',
+  ingress:'Bebisars sömn förändras mycket under det första året. Barn behöver olika mycket sömn, och det är vanligt att vakna på natten länge.',
+  tags:'sömn sover dåligt vaknar natt nattning rutin tupplur sömnmönster läggning',
+  src:['1177'],
+  blocks:[
+    {h:'0–3 månader'},{p:'Nyfödda sover en stor del av dygnet, men i korta pass. Dygnsrytmen har inte satt sig än, och bebisen vaknar ofta för att äta.'},
+    {h:'3–6 månader'},{p:'Många börjar sova längre stunder på natten. Det är fortfarande vanligt att vakna och vilja äta.'},
+    {h:'6–9 månader'},{p:'Många sover 2–3 tupplurar om dagen. Nya färdigheter och separationsångest kan ge fler uppvaknanden en period.'},
+    {h:'9–12 månader'},{p:'Många går över till 1–2 tupplurar. En lugn och likadan kvällsrutin kan hjälpa barnet att förstå att det är dags att sova.'},
+    {h:'Kvällsrutin – ett exempel'},{ol:['Kvällsmat','Bad eller tvätt','Pyjamas och tandborstning','Sång, bok eller mys','Säg godnatt på samma sätt varje kväll']},
+    {ok:['Att vakna flera gånger per natt under det första året','Att sömnen blir sämre en period när barnet lär sig något nytt','Att vissa barn sover mer och andra mindre']},
+    {care:['Barnet snarkar mycket och verkar ha andningsuppehåll','Barnet verkar ha ont eller är sjukt','Du är så trött att du har svårt att klara vardagen – BVC kan ge stöd']}
+  ]});
+
+A('amning-forsta',{sec:'0-1', cat:'mat', title:'Första amningen och ett bra tag', e:'🤱', grav:true,
+  ingress:'Amning är något du och bebisen lär er tillsammans. Det kan ta några dagar eller veckor innan det känns naturligt.',
+  tags:'amning amma bröst tag amningsställning positioner hur ofta får i sig blöjor mjölk',
+  src:['1177'],
+  blocks:[
+    {h:'Första amningen'},{p:'Många bebisar söker sig själva mot bröstet när de får ligga hud mot hud efter födseln. Ta den tid ni behöver.'},
+    {h:'Så kan du känna igen ett bra tag'},{ul:['Bebisen har munnen vidöppen och tar in en stor del av vårtgården, inte bara bröstvårtan','Hakan ligger mot bröstet och läpparna är utåtvända','Du hör eller ser att bebisen sväljer','Det kan göra lite ont i början av en amning, men det ska inte fortsätta göra ont hela tiden']},
+    {h:'Hur ofta?'},{p:'Nyfödda vill ofta amma 8–12 gånger per dygn, ibland ännu tätare under vissa perioder. Det är normalt och hjälper mjölkproduktionen att komma igång.'},
+    {h:'Så märker du att bebisen får i sig'},{ul:['Bebisen blöter flera blöjor per dygn efter de första dagarna','Bebisen bajsar regelbundet de första veckorna','Bebisen verkar nöjd efter maten och går upp i vikt vid kontrollerna på BVC']},
+    {care:['Bebisen har få blöta blöjor eller verkar slö och ointresserad av att äta','Det gör mycket ont att amma trots att du har provat att ändra taget','Du undrar om bebisen får i sig tillräckligt']},
+    {tip:'Du kan få amningsstöd av BVC, barnmorskan eller en amningsmottagning i din region.'}
+  ]});
+
+A('amning-stockning',{sec:'0-1', cat:'mat', periods:[0,1,2,3], title:'Mjölkstockning', e:'🤍', grav:true,
+  ingress:'Mjölkstockning betyder att mjölken inte kommer ut ordentligt från en del av bröstet. Det är vanligt och brukar gå över inom några dagar.',
+  tags:'mjölkstockning amning bröst ömt knöl rött feber',
+  src:['1177'],
+  blocks:[
+    {h:'Vanliga tecken'},{ul:['Ett ömt, rött eller svullet område i bröstet','En knöl som känns öm','Du kan känna dig lite hängig']},
+    {h:'Det här kan hjälpa'},{ul:['Fortsätt amma ofta, gärna på det ömma bröstet först','Prova olika amningsställningar','Kyl bröstet mellan amningarna','Vila så mycket du kan']},
+    {care:['Du får feber och känner dig sjuk','Det inte börjar bli bättre inom ett par dygn','Du har mycket ont eller svårt att tömma bröstet']}
+  ]});
+
+A('flaska',{sec:'0-1', cat:'mat', periods:[0,1,2,3], title:'Flaskmatning och ersättning', e:'🍼', grav:true,
+  ingress:'Ersättning ger bebisen den näring hen behöver. Oavsett om du ger bara flaska eller kombinerar med amning är närheten under måltiden lika viktig.',
+  tags:'flaska flaskmatning ersättning modersmjölksersättning välling diska sterilisera napp flöde blanda',
+  src:['1177','LV'],
+  blocks:[
+    {h:'Välja ersättning'},{p:'Följ åldersangivelsen på förpackningen. Fråga BVC om du undrar över specialersättningar, till exempel vid allergi.'},
+    {h:'Blanda och hantera'},{ol:['Tvätta händerna och använd rena flaskor','Följ anvisningen på förpackningen exakt – mät pulver och vatten noga','Blanda och ge ersättningen direkt','Häll bort det som blir kvar i flaskan efter måltiden']},
+    {h:'Diska och rengöra'},{p:'Diska flaskor och nappar noga i varmt vatten med diskmedel, eller i diskmaskin. Nya flaskor och nappar kan kokas innan de används första gången.'},
+    {h:'Nappar och flöde'},{p:'Nappens flöde ska passa bebisens ålder och sugförmåga. Om bebisen hostar eller spiller mycket kan flödet vara för snabbt.'},
+    {tip:'Håll bebisen nära, titta på varandra och låt hen ta pauser. Det kallas ibland responsiv flaskmatning.'}
+  ]});
+
+A('smakportioner',{sec:'0-1', cat:'mat', periods:[1,2,3], title:'Smakportioner och matintroduktion', e:'🥄',
+  ingress:'Smakportioner är små mängder mat som barnet får smaka på, vid sidan av bröstmjölk eller ersättning. Många börjar någon gång mellan 4 och 6 månader.',
+  tags:'smakportioner matintroduktion börja äta mat puré mos konsistens plockmat honung salt fast föda',
+  src:['LV'],
+  blocks:[
+    {h:'När kan vi börja?'},{p:'Barn kan börja få smakportioner någon gång mellan 4 och 6 månaders ålder. Runt 6 månader behöver de flesta barn mer mat än bara mjölk.'},
+    {h:'Konsistens steg för steg'},{timeline:[
+      {t:'Början', d:'Slät puré eller mos – några teskedar.'},
+      {t:'Efter hand', d:'Grövre mos med små mjuka bitar.'},
+      {t:'Runt 8–9 månader', d:'Mjuk plockmat som barnet kan ta själv.'},
+      {t:'Runt 1 år', d:'Det mesta av familjens mat, anpassad för barnet.'}]},
+    {h:'Bra att tänka på'},{ul:['Salta inte barnets mat','Ge inte honung före ett års ålder','Ge inte risdryck eller riskakor till barn under 6 år','Barnet ska sitta upp och ha en vuxen bredvid när hen äter']},
+    {tip:'Det kan behövas många försök innan barnet tycker om en ny smak. Det är helt normalt att spotta ut.'}
+  ], extra:'recipes'});
+
+A('allergener',{sec:'0-1', cat:'mat', periods:[1,2,3], title:'Ägg, fisk och andra vanliga allergener', e:'🥚',
+  ingress:'Du behöver inte vänta med ägg, fisk, gluten, jordnötter eller andra livsmedel som kan ge allergi. De kan introduceras när barnet börjar äta.',
+  tags:'ägg fisk gluten jordnötter nötter allergi allergener äta börja',
+  src:['LV','1177'],
+  blocks:[
+    {p:'Det finns inget skäl att vänta med livsmedel som ofta ger allergi. Det kan tvärtom vara bra att barnet får smaka dem under det första året.'},
+    {h:'Så kan du göra'},{ul:['Börja med en liten mängd och öka efter hand','Ägg ska vara genomkokt eller genomstekt','Jordnötter och nötter ges finmalda eller som slätt nötsmör i maten – aldrig hela','Introducera gärna en ny sak i taget, så är det lättare att se hur barnet reagerar']},
+    {care:['Barnet får utslag, kräks eller blir svullet i ansiktet efter att ha ätit något','Barnet har svårt eksem och du undrar hur du ska introducera ny mat']},
+    {sos:['Barnet får svårt att andas, blir svullet i munnen eller svalget, eller blir slappt efter att ha ätit']}
+  ], extra:'recipes'});
+
+A('lek',{sec:'0-1', cat:'lek', title:'Lek och aktiviteter under första året', e:'🧸',
+  ingress:'Lek är barnets sätt att lära sig. Det behövs inga dyra leksaker – det viktigaste är du.',
+  tags:'lek aktiviteter magträning sånger böcker sensorisk lek leksaker',
+  src:['1177'],
+  blocks:[
+    {h:'0–3 månader'},{ul:['Magträning en liten stund flera gånger om dagen när bebisen är vaken','Titta på varandra, prata och sjung','Kontrastrika bilder på nära håll']},
+    {h:'3–6 månader'},{ul:['Saker att greppa och skaka','Spegellek','Rim och ramsor med rörelser']},
+    {h:'6–9 månader'},{ul:['Tittut och gömma leksaker under en filt','Sensorisk lek med olika material, som tyg, trä och papper','Pekböcker']},
+    {h:'9–12 månader'},{ul:['Stapla och riva klossar','Rulla boll fram och tillbaka','Gåvagn eller skjutleksak när barnet börjat stå']},
+    {tip:'Läs tillsammans från start. Pekböcker och att prata om bilderna stärker språket.'}
+  ]});
+
+A('feber',{sec:'0-1', cat:'halsa', title:'Feber hos små barn', e:'🌡️',
+  ingress:'Feber är kroppens sätt att försvara sig mot infektioner och är oftast inte farligt. Hur barnet mår i övrigt säger mer än själva temperaturen.',
+  tags:'feber sjuk varm temperatur infektion febernedsättande tempen',
+  src:['1177'],
+  blocks:[
+    {p:'Barn har feber när temperaturen är 38 grader eller mer.'},
+    {callout:'Är barnet yngre än 3 månader och har feber? Kontakta vården direkt. Ring 1177 om du behöver hjälp att veta vart ni ska vända er.'},
+    {h:'Det här kan du göra'},{ul:['Låt barnet vila och ha lätta kläder','Erbjud bröstmjölk, ersättning eller vätska ofta','Fråga på apoteket eller 1177 om du undrar över febernedsättande läkemedel och dosering för barnets ålder och vikt']},
+    {care:['Barnet dricker mycket mindre än vanligt eller kissar mindre','Barnet har haft feber i mer än tre dygn','Barnet verkar mer påverkat än du är van vid','Du är orolig – lita på din känsla']},
+    {sos:['Barnet har svårt att andas','Barnet är slappt, svårt att väcka eller går inte att få kontakt med','Barnet har utslag som inte bleknar när du trycker ett glas mot huden','Barnet har kramper']}
+  ]});
+
+A('forkylning',{sec:'0-1', cat:'halsa', title:'Förkylning hos bebisar', e:'🤧',
+  ingress:'Små barn blir ofta förkylda, särskilt när de börjar träffa andra barn. En förkylning brukar gå över av sig själv inom en till två veckor.',
+  tags:'förkylning snuva hosta hostning täppt näsa sjuk förkyld',
+  src:['1177'],
+  blocks:[
+    {h:'Det här kan hjälpa'},{ul:['Koksaltdroppar i näsan kan göra det lättare att andas och äta','Erbjud mat oftare men i mindre mängder','Låt barnet vila']},
+    {ok:['Att hostan sitter kvar en tid efter att förkylningen gått över','Att små barn är förkylda många gånger per år']},
+    {care:['Barnet andas snabbt eller ansträngt','Barnet äter eller dricker mycket mindre än vanligt','Barnet har feber i mer än tre dygn eller verkar ha ont i örat']},
+    {sos:['Barnet har svårt att andas eller drar in huden mellan revbenen när hen andas']}
+  ]});
+
+A('skrik',{sec:'0-1', cat:'halsa', periods:[0,1], title:'När bebisen skriker mycket', e:'😭',
+  ingress:'Alla bebisar gråter, och vissa gråter mycket. Det kan vara väldigt slitsamt – och det är inte ditt fel.',
+  tags:'skriker gråter gråt kolik otröstlig skrik lugna',
+  src:['1177'],
+  blocks:[
+    {p:'Många bebisar har perioder av otröstlig gråt de första månaderna, ofta på kvällen. Det kallas ibland kolik och brukar gå över när bebisen är runt 3–4 månader.'},
+    {h:'Det här kan hjälpa'},{ul:['Bär bebisen nära, gärna i bärsele','Gunga, vagga eller gå en promenad med vagnen','Vyssjande ljud eller ett jämnt brus','Minska intrycken – dämpat ljus och lugn miljö','Turas om med någon annan om ni är två']},
+    {tip:'Om du känner att du håller på att tappa tålamodet: lägg bebisen på en säker plats, som sängen, och gå ut ur rummet en stund. Skaka aldrig ett barn.'},
+    {care:['Gråten låter annorlunda än vanligt, till exempel gäll eller svag','Bebisen har feber, kräks, äter dåligt eller verkar ha ont','Du orkar inte längre – BVC kan hjälpa er']},
+    {sos:['Bebisen är slapp, svår att väcka eller andas ansträngt']}
+  ]});
+
+A('tander',{sec:'0-1', cat:'halsa', periods:[2,3], title:'Tänder och tandborstning', e:'🦷',
+  ingress:'De första tänderna kommer ofta någon gång mellan 6 och 12 månader, men det varierar mycket.',
+  tags:'tänder tand tandsprickning tandborstning fluor tandkräm dregla',
+  src:['1177'],
+  blocks:[
+    {h:'Tandsprickning'},{ul:['Barnet kan dregla, bita på saker och vara lite gnälligt','Något svalt att bita på kan lindra','Tandsprickning ger inte hög feber – vid feber, tänk på andra orsaker']},
+    {h:'Borsta från första tanden'},{ul:['Borsta två gånger om dagen, morgon och kväll','Använd fluortandkräm – en mängd lika stor som barnets lillfingernagel','Låt barnet sitta i knät så att du ser bra']},
+    {tip:'Barnet blir kallat till tandvården. När det sker första gången varierar mellan regioner.'}
+  ]});
+
+A('bajs',{sec:'0-1', cat:'hygien', title:'Bajs hos bebisar – vad är normalt?', e:'💩',
+  ingress:'Bebisars bajs kan skifta mycket i färg, konsistens och hur ofta det kommer. Det mesta är helt normalt – men det finns några färger du ska känna till.',
+  tags:'bajs bajsar avföring grönt grön gult gul brunt blöja mage förstoppning diarré färg mekonium vitt',
+  src:['1177'],
+  blocks:[
+    {h:'De första dagarna'},{p:'Det första bajset kallas mekonium och är svartgrönt och klibbigt. Efter några dagar blir det ljusare, och när bebisen får mer mjölk brukar det bli gult eller gulbrunt.'},
+    {h:'Färger – en snabbguide'},
+    {swatch:[
+      {c:'#D9A93A', n:'Gult eller senapsgult', d:'Vanligt hos ammade bebisar. Ofta löst och lite grynigt.', ok:true},
+      {c:'#A8773D', n:'Brunt eller gulbrunt', d:'Vanligt vid ersättning och när bebisen börjat äta mat.', ok:true},
+      {c:'#7A8A3A', n:'Grönt', d:'Kan vara helt normalt – till exempel om bajset legat en stund i blöjan eller efter ny mat.', ok:true},
+      {c:'#E8E4DA', n:'Vitt, ljusgrått eller kritfärgat', d:'Kontakta vården samma dag.', ok:false},
+      {c:'#8E2A2A', n:'Rött, blodigt eller svart', d:'Svart efter de första dagarna, eller blod – kontakta vården.', ok:false}]},
+    {h:'Hur ofta?'},{p:'Det varierar mycket. Vissa bebisar bajsar efter varje mål, andra mer sällan. Helammade bebisar som är några veckor gamla kan ibland gå flera dagar – upp till en vecka – mellan gångerna och ändå må bra, så länge bajset är mjukt.'},
+    {care:['Bajset är vitt, ljusgrått eller kritfärgat','Det finns blod i bajset eller det är svart efter de första dagarna','Barnet har diarré och verkar trött, slött eller kissar mindre än vanligt','Barnet kräks ofta, verkar ha ont eller har en hård, uppblåst mage','Du är orolig av någon annan anledning']}
+  ]});
+
+A('hud',{sec:'0-1', cat:'hygien', title:'Blöjeksem och torr hud', e:'🧴',
+  ingress:'Bebisars hud är tunn och känslig. Rodnad i blöjområdet och torra fläckar är vanligt och går oftast att lindra hemma.',
+  tags:'hud blöjeksem eksem torr hud utslag röd rumpa krämer zinksalva',
+  src:['1177'],
+  blocks:[
+    {h:'Blöjeksem'},{ul:['Byt blöja ofta','Tvätta med ljummet vatten och låt huden torka ordentligt','Låt gärna bebisen vara utan blöja en stund','En skyddande zinksalva kan hjälpa']},
+    {h:'Torr hud och eksem'},{p:'Torr, rödaktig hud kan vara eksem. Mjukgörande kräm utan parfym flera gånger om dagen kan hjälpa.'},
+    {care:['Utslagen sprider sig, blir blåsiga eller vätskar','Det inte blir bättre efter några dagars behandling','Barnet har mycket klåda och sover dåligt']},
+    {sos:['Barnet har utslag som inte bleknar när du trycker ett glas mot huden och verkar sjukt']}
+  ]});
+
+A('barnsakring',{sec:'0-1', cat:'sak', periods:[2,3], title:'Barnsäkra hemmet', e:'🛡️',
+  ingress:'När barnet börjar röra sig på egen hand upptäcker hen hela hemmet. Några förändringar gör det tryggare.',
+  tags:'barnsäkring barnsäkra hemmet grind trappa gift läkemedel batteri olycka säkerhet',
+  src:['KV','1177','GIC'], list:'barnsakring',
+  blocks:[
+    {ul:['Sätt grind vid trappor','Förvara läkemedel och rengöringsmedel högt upp eller i låsta skåp','Fäst bokhyllor och byråar i väggen så att de inte kan välta','Håll sladdar till gardiner och persienner utom räckhåll','Lämna aldrig barnet utan uppsikt i badet, inte ens en kort stund','Håll små föremål som knappcellsbatterier, magneter och nötter utom räckhåll']},
+    {tip:'Om barnet har fått i sig något som kan vara giftigt: ring Giftinformationscentralen på 010-456 67 00. Vid akut fara, ring 112.'},
+    {sos:['Barnet har svalt ett knappcellsbatteri eller en magnet','Barnet har fått i sig något och har svårt att andas eller är påverkat']}
+  ]});
+
+A('bilstol',{sec:'0-1', cat:'sak', title:'Bakåtvänd bilbarnstol', e:'🚗', grav:true,
+  ingress:'Barn ska åka bakåtvänt så länge som möjligt – gärna tills de är minst fyra år.',
+  tags:'bilbarnstol babyskydd bilstol bakåtvänd bil krockkudde säkerhet',
+  src:['TS','NTF'], compare:'babyskydd',
+  blocks:[
+    {p:'Barn som är kortare än 135 cm ska använda en bilbarnstol eller bälteskudde som passar deras längd och vikt.'},
+    {ul:['Det första skyddet är ofta ett babyskydd, som används tills barnet blir för långt eller tungt','Byt när barnets huvud når över kanten eller när maxlängd eller maxvikt är nådd','Placera aldrig ett bakåtvänt skydd framför en aktiverad krockkudde','Köp gärna bilbarnstol ny, eller begagnad från någon du vet att den inte varit med i en krock']},
+    {tip:'Montera babyskyddet innan förlossningen och öva, så att du känner dig säker när ni åker hem.'}
+  ]});
+
+A('forskola',{sec:'0-1', cat:'utv', periods:[2,3], title:'Ansöka om förskola', e:'🎒',
+  ingress:'Kommunen ska erbjuda en förskoleplats inom fyra månader från att du ansökt. Därför är det bra att söka i god tid.',
+  tags:'förskola förskoleansökan förskoleplats inskolning dagis kö ansöka',
+  src:['SKOL'],
+  blocks:[
+    {ul:['Ansök hos kommunen – oftast via en e-tjänst på kommunens webbplats','Sök minst fyra månader innan ni behöver platsen','Du kan ofta önska vilka förskolor ni helst vill ha','Barnet har rätt till förskola från ett års ålder när föräldrarna arbetar eller studerar']},
+    {h:'Inskolning'},{p:'De första dagarna på förskolan brukar en förälder vara med. Det kallas inskolning och kan ta från några dagar till ett par veckor.'},
+    {tip:'Gör en egen checklista för förskolestarten – till exempel extrakläder, vantar och ett gosedjur.'}
+  ]});
+
+/* Graviditet */
+A('g-ordna',{sec:'grav', cat:'grav', title:'Att ordna under graviditeten', e:'📋',
+  ingress:'En överblick över det praktiska – i ungefär den ordning många behöver det. Du behöver inte göra allt på en gång.',
+  tags:'ordna graviditet barnmorskemottagning mödravård föräldrapenning graviditetspenning föräldraskap namn skatteverket föräldraledighet',
+  src:['1177','FK','SKV'],
+  blocks:[
+    {h:'Tidigt i graviditeten'},{ul:['Kontakta en barnmorskemottagning för att boka första besöket','Fundera på gravid- och barnförsäkring – många försäkringsbolag har en sista graviditetsvecka för att teckna','Har du ett fysiskt tungt eller riskfyllt arbete? Läs om graviditetspenning hos Försäkringskassan']},
+    {h:'Mitt i graviditeten'},{ul:['Planera föräldraledigheten och prata med arbetsgivaren – ledighet ska anmälas minst två månader innan','Om ni inte är gifta: bekräfta föräldraskapet. Det kan ofta göras digitalt, även före födseln','Fundera på vad ni behöver köpa – och vad som kan vänta']},
+    {h:'Från vecka 30'},{ul:['Packa BB-väskan och montera babyskyddet i bilen','Skriv gärna ett förlossningsbrev','Spara förlossningens telefonnummer i mobilen']},
+    {h:'Efter födseln'},{ul:['Anmäl barnets namn till Skatteverket inom tre månader','Ansök om föräldrapenning hos Försäkringskassan','Barnbidraget kommer automatiskt']}
+  ]});
+
+A('g-forsakring',{sec:'grav', cat:'grav', title:'Gravidförsäkring och barnförsäkring', e:'🛡️',
+  ingress:'En gravidförsäkring är en frivillig försäkring som kan ge ersättning vid vissa komplikationer under graviditet och förlossning. Villkoren skiljer sig mycket mellan bolagen.',
+  tags:'gravidförsäkring barnförsäkring försäkring teckna graviditetsvecka villkor',
+  src:['KF'], compare:'gravidforsakring',
+  blocks:[
+    {p:'Ofta ingår gravidförsäkringen i en barnförsäkring som tecknas för det väntade barnet. Då kan barnet vara försäkrat redan från födseln.'},
+    {h:'Det här brukar skilja mellan försäkringarna'},{ul:['Senaste graviditetsvecka då du kan teckna','Vilka komplikationer som ger ersättning, för både den gravida och barnet','Om ersättning ges vid till exempel akut kejsarsnitt eller vård på neonatal','Om krisstöd ingår','Pris, och om den är kopplad till en barnförsäkring']},
+    {tip:'Läs förköpsinformationen och jämför villkoren – inte bara priset.'},
+    {p:'Den offentliga vården under graviditet och förlossning gäller alla, oavsett om du har en privat försäkring eller inte.'}
+  ]});
+
+A('g-kopa',{sec:'grav', cat:'grav', title:'Vad behöver man köpa – och vad kan vänta?', e:'🛍️',
+  ingress:'Det är lätt att köpa för mycket innan bebisen kommer. Här är det som de flesta behöver från start, och sådant som gärna kan vänta.',
+  tags:'köpa handla behöver inte köpa babyutrustning barnvagn babyskydd kläder',
+  src:['KV','1177'],
+  blocks:[
+    {h:'Behövs från start'},{ul:['Babyskydd för bilen, om ni ska åka bil från BB','En säker sovplats med fast, plan madrass','Kläder i storlek 50–56 och några i 62','Blöjor och tvättlappar','Vagn eller bärsele – eller båda','Om ni ska ge ersättning: flaskor och ersättning']},
+    {h:'Kan ofta vänta'},{ul:['Matstol – behövs när barnet börjar äta och sitta','Babysitter och babygym','Många kläder i små storlekar – bebisar växer snabbt','Skötbord – en skötbädd på en byrå räcker för många','Flaskvärmare och sterilisator – inte nödvändigt för alla']},
+    {tip:'Köp gärna begagnat. Undantaget är bilbarnstolen – köp den ny eller från någon du vet att den inte varit med i en krock.'}
+  ]});
+
+A('g-brev',{sec:'grav', cat:'grav', title:'Förlossningsbrev', e:'✍️',
+  ingress:'Ett förlossningsbrev är ett kort brev till personalen om dina tankar, önskemål och eventuella rädslor inför förlossningen. Det är frivilligt.',
+  tags:'förlossningsbrev önskemål förlossning brev rädsla',
+  src:['1177'],
+  blocks:[
+    {h:'Det här kan du skriva om'},{ul:['Hur du vill att personalen ska bemöta dig','Tankar om smärtlindring','Om du är rädd för något, till exempel stick eller att tappa kontrollen','Tidigare erfarenheter av vård eller förlossning','Hur din partner eller stödperson vill vara delaktig','Önskemål efter födseln, till exempel hud mot hud']},
+    {tip:'Håll det kort – gärna under en sida. Var öppen för att förlossningen kan bli annorlunda än planerat.'},
+    {p:'Ta med brevet till förlossningen, eller fråga din barnmorska hur din region vill ha det.'}
+  ]});
+
+A('bb-tidslinje',{sec:'grav', cat:'grav', title:'Från förlossning till hemgång', e:'🕊️',
+  ingress:'Så här kan de första timmarna och dagarna efter en förlossning se ut. Det ser olika ut för alla – se det som en ungefärlig karta.',
+  tags:'bb hemgång efter förlossningen första timmarna första dygnet pku tidslinje',
+  src:['1177'],
+  blocks:[
+    {timeline:[
+      {t:'Första 2 timmarna', d:'Bebisen läggs gärna hud mot hud direkt. Många bebisar söker sig till bröstet under den första timmen. Barnmorskan kontrollerar blödning och att ni båda mår bra.'},
+      {t:'Första dygnet', d:'Vila, närhet och täta mål. Bebisen kan vara väldigt pigg eller sova mycket. Personalen hjälper till med amning eller flaska och de första blöjbytena.'},
+      {t:'Dag 2', d:'Mjölken börjar ofta komma igång dag 2–4. Bebisen undersöks av läkare och PKU-provet tas, tidigast när barnet är 48 timmar.'},
+      {t:'Hemgång', d:'Många åker hem efter 1–3 dygn, vissa samma dag. Ni får information om efterkontroller, BVC och vart ni ringer om ni har frågor.'}]},
+    {tip:'Fråga gärna innan hemgång: vem ringer vi om vi undrar över något i natt?'}
+  ]});
+
+A('f-smartlindring',{sec:'grav', cat:'grav', title:'Smärtlindring under förlossningen', e:'💧',
+  ingress:'Det finns många sätt att lindra smärta under förlossningen. Du kan byta metod under tiden, och det är inget misslyckande att ändra sig.',
+  tags:'smärtlindring lustgas epidural tens bad förlossning ont värkar spinal',
+  src:['1177'],
+  blocks:[
+    {h:'Utan läkemedel'},{ul:['Andning och avslappning','Rörelse, olika ställningar och stöd av någon','Varmt bad eller dusch','Värme och massage','TENS – svaga elektriska impulser via plattor på ryggen','Sterila vattenkvaddlar – små injektioner med vatten i ländryggen']},
+    {h:'Lustgas'},{p:'Lustgas andas in genom en mask eller ett munstycke när värken börjar. Den tar bort toppen av smärtan och går ur kroppen snabbt när du slutar andas in den.'},
+    {h:'Epidural'},{p:'En epidural ges som en tunn slang i ryggen och lindrar smärtan i nedre delen av kroppen. Du är vaken och kan ofta röra dig lite. Värkarna kan bli svagare, och då kan du behöva värkstimulerande dropp.'},
+    {h:'Andra metoder'},{p:'Det finns också till exempel spinalbedövning och pudendusblockad, en bedövning av underlivet. Barnmorskan berättar vad som passar i din situation.'}
+  ]});
+
+A('f-igang',{sec:'grav', cat:'grav', title:'Igångsättning', e:'⏱️',
+  ingress:'Ibland behöver förlossningen sättas igång, till exempel om graviditeten har gått över tiden eller av medicinska skäl.',
+  tags:'igångsättning sätta igång överburen förlossning',
+  src:['1177'],
+  blocks:[
+    {p:'Det kan göras på olika sätt: med tabletter, med en ballongkateter som mjukar upp livmoderhalsen, genom att hinnorna öppnas eller med värkstimulerande dropp. Ofta används flera steg efter varandra.'},
+    {p:'En igångsättning kan ta tid – ibland ett eller flera dygn innan förlossningen kommer igång ordentligt. Ta gärna med sådant som gör väntan lättare.'},
+    {tip:'Fråga barnmorskan hur det brukar gå till på just din förlossningsavdelning.'}
+  ]});
+
+A('f-kejsarsnitt',{sec:'grav', cat:'grav', title:'Kejsarsnitt – planerat och akut', e:'🏥',
+  ingress:'Ett kejsarsnitt kan vara planerat i förväg eller göras akut under förlossningen. Båda är vanliga, och målet är detsamma: att du och barnet ska må bra.',
+  tags:'kejsarsnitt akut kejsarsnitt planerat snitt operation',
+  src:['1177'],
+  blocks:[
+    {h:'Planerat kejsarsnitt'},{p:'Ett planerat kejsarsnitt bestäms i förväg, till exempel av medicinska skäl eller efter samtal om förlossningsrädsla. Du får oftast en ryggbedövning och är vaken.'},
+    {h:'Akut kejsarsnitt'},{p:'Ibland behöver barnet födas snabbt. Personalen förklarar vad som händer, även om det går fort. Partnern kan ofta vara med, men inte alltid om full narkos behövs.'},
+    {h:'Efteråt'},{ul:['Hud mot hud kan ofta ske redan på operationssalen eller strax efter','Du får smärtlindring och hjälp att komma upp ur sängen','Undvik tunga lyft de första veckorna och fråga vad som gäller för dig','Det är vanligt att ha många känslor efter ett akut kejsarsnitt – prata gärna om upplevelsen med barnmorskan']},
+    {care:['Du får feber','Såret blir rött, svullet eller det kommer var','Blödningen ökar eller luktar illa','Du får ont i ett ben eller det blir svullet']},
+    {sos:['Du plötsligt får svårt att andas eller ont i bröstet']}
+  ]});
+
+A('f-hudmothud',{sec:'grav', cat:'grav', title:'Hud mot hud', e:'🤍',
+  ingress:'Hud mot hud betyder att bebisen ligger naken, med blöja, direkt mot din eller partnerns bara bröst.',
+  tags:'hud mot hud närhet nyfödd förlossning',
+  src:['1177'],
+  blocks:[
+    {h:'Därför är det bra'},{ul:['Det hjälper bebisen att hålla värmen och få en stabil andning och puls','Det gör det lättare för bebisen att hitta bröstet','Det lugnar – både bebisen och föräldern']},
+    {p:'Hud mot hud är bra direkt efter födseln, men också under de första veckorna och månaderna. Partnern kan lika gärna ha bebisen hud mot hud.'},
+    {tip:'Lägg en filt över er båda och se till att bebisens näsa och mun är fria.'}
+  ]});
+
+A('f-partner',{sec:'grav', cat:'grav', title:'Partnerns roll', e:'🤝',
+  ingress:'Som partner eller stödperson är du viktig – även när det känns som att du inte kan göra så mycket.',
+  tags:'partner pappa stödperson medförälder förlossning',
+  src:['1177'],
+  blocks:[
+    {ul:['Var nära och uppmärksam på vad den som föder behöver just nu','Hjälp till med vatten, något att äta, värme eller massage','Var en länk till personalen och påminn om önskemålen i förlossningsbrevet','Ha bebisen hud mot hud om den som fött inte kan','Ta hand om dig själv också – ät, drick och vila när du kan']},
+    {p:'Det är vanligt att partnern också blir omskakad, särskilt om förlossningen blev annorlunda än väntat. Det är okej att prata om det efteråt.'}
+  ]});
+
+A('f-neonatal',{sec:'grav', cat:'grav', title:'När bebisen behöver extra vård', e:'🫶',
+  ingress:'Vissa bebisar behöver vård på en neonatalavdelning efter födseln, till exempel om de är födda för tidigt eller behöver hjälp med andning, blodsocker eller en infektion.',
+  tags:'neonatal för tidigt född prematur extra vård',
+  src:['1177'],
+  blocks:[
+    {p:'På de flesta neonatalavdelningar är föräldrar välkomna dygnet runt och uppmuntras att vara delaktiga i vården – till exempel genom hud mot hud och att hjälpa till med matningen.'},
+    {ul:['Fråga personalen om allt du undrar över – inga frågor är för små','Pumpa bröstmjölk om du vill amma men bebisen inte kan äta själv ännu','Ta emot stöd från personalen, kuratorn och dina närmaste']},
+    {p:'Att ha ett barn på neonatal kan vara omtumlande. Många föräldrar beskriver en blandning av oro, trötthet och glädje.'}
+  ]});
+
+A('pott',{sec:'1-5', cat:'vardag', periods:[1,2,3], title:'Potträning – när och hur?', e:'🚽',
+  ingress:'De flesta barn blir blöjfria någon gång mellan 2 och 4 års ålder. Det finns ingen rätt tidpunkt – barnet behöver vara redo.',
+  tags:'potträning potta blöjfri toalett kiss bajs',
+  src:['1177'],
+  blocks:[
+    {h:'Tecken på att barnet kan vara redo'},{ul:['Barnet märker när hen kissar eller bajsar','Blöjan är torr längre stunder','Barnet är intresserat av toaletten eller vill ta av blöjan']},
+    {h:'Så kan ni göra'},{ul:['Låt barnet sitta på pottan vid fasta tider, till exempel efter maten','Beröm försöken, inte bara det som lyckas','Ha kläder som är lätta att ta av','Räkna med olyckor – det hör till']},
+    {ok:['Att det tar flera månader','Att barnet går tillbaka till blöjan en period, till exempel vid förändringar','Att barnet är torrt på dagen långt innan natten']},
+    {care:['Barnet har ont när hen kissar eller bajsar','Barnet har varit torrt men börjar ofta kissa på sig igen']}
+  ]});
+
+const GRAV_GROUPS = [
+  {t:'Under graviditeten', items:['a:g-ordna','a:g-forsakring','a:g-kopa','a:g-brev','l:v30','l:sista']},
+  {t:'BB-väskan', items:['l:bb']},
+  {t:'Förlossning & BB', items:['a:bb-tidslinje','a:f-smartlindring','a:f-igang','a:f-kejsarsnitt','a:f-hudmothud','a:f-partner','a:f-neonatal']},
+  {t:'Amning & flaska', items:['a:amning-forsta','a:amning-stockning','a:flaska']},
+  {t:'Efter förlossningen', items:['a:fjarde','a:bilstol']}
+];
+
+/* ---------------- DATA: snabb hjälp ---------------- */
+const HELP = [
+  {id:'sjuk', e:'🤒', t:'Mitt barn är sjukt', k:'sjuk feber hosta förkyld snuva kräks', intro:'Andas lugnt. De flesta infektioner hos barn är ofarliga och går över av sig själva. Hur barnet mår i övrigt – om hen äter, dricker, kissar och går att få kontakt med – säger mer än temperaturen.',
+    sos:['Barnet har svårt att andas','Barnet är slappt, svårt att väcka eller går inte att få kontakt med','Barnet har utslag som inte bleknar när du trycker ett glas mot huden','Barnet har kramper'],
+    care:['Barnet är yngre än 3 månader och har feber, 38 grader eller mer – kontakta vården direkt','Barnet dricker eller kissar mycket mindre än vanligt','Barnet har haft feber i mer än tre dygn','Du är orolig – lita på din känsla'], a:['feber','forkylning']},
+  {id:'somn', e:'😴', t:'Mitt barn sover dåligt', k:'sover dåligt sömn vaknar natt somnar', intro:'Många föräldrar upplever perioder då barnet sover sämre. Det kan hänga ihop med utveckling, sjukdom, tänder eller förändringar i vardagen.',
+    ok:['Att vakna flera gånger per natt under det första året','Sämre sömn en period när barnet lär sig något nytt'],
+    care:['Barnet snarkar mycket och verkar ha andningsuppehåll','Barnet verkar ha ont eller är sjukt','Du är så trött att du har svårt att klara vardagen'], a:['somn-forsta','sov-saker']},
+  {id:'mat', e:'🥛', t:'Mitt barn äter dåligt', k:'äter dåligt mat vägrar amning flaska aptit', intro:'Barns aptit varierar från dag till dag. Om barnet i övrigt är piggt, blöter blöjor och växer som det ska är det oftast ingen fara.',
+    ok:['Att äta mindre en period, till exempel vid förkylning eller tandsprickning','Att behöva smaka en ny mat många gånger innan den blir omtyckt'],
+    care:['Barnet blöter färre blöjor än vanligt eller verkar torrt i munnen','Barnet kräks ofta eller har svårt att svälja','Barnet går inte upp i vikt – ta upp det på BVC'], a:['amning-forsta','flaska','smakportioner']},
+  {id:'bajs', e:'💩', t:'Mitt barn bajsar konstigt', k:'bajs bajsar avföring grönt mage diarré förstoppning', intro:'Bebisars bajs kan skifta mycket i färg och konsistens. Grönt, gult och brunt är ofta helt normalt.',
+    ok:['Grönt, gult eller brunt bajs','Att helammade bebisar ibland bajsar sällan, så länge bajset är mjukt'],
+    care:['Bajset är vitt, ljusgrått eller kritfärgat','Det finns blod i bajset','Barnet har diarré och verkar slött eller kissar mindre'], a:['bajs']},
+  {id:'skrik', e:'😭', t:'Mitt barn skriker mycket', k:'skriker gråter kolik otröstlig', intro:'Alla bebisar gråter, och vissa gråter väldigt mycket – särskilt de första månaderna. Det är inte ditt fel.',
+    ok:['Perioder av otröstlig gråt, ofta på kvällen, under de första månaderna'],
+    care:['Gråten låter annorlunda än vanligt','Bebisen har feber, kräks eller äter dåligt','Du orkar inte längre'],
+    sos:['Bebisen är slapp, svår att väcka eller andas ansträngt'], a:['skrik','fjarde']},
+  {id:'hud', e:'🧴', t:'Hudproblem', k:'hud utslag eksem blöjeksem torr röd', intro:'Små barns hud är känslig. Rodnad, torra fläckar och små utslag är vanligt och går oftast att lindra hemma.',
+    ok:['Små vita prickar i ansiktet hos nyfödda','Torr hud, särskilt vintertid'],
+    care:['Utslagen sprider sig, blir blåsiga eller vätskar','Barnet har mycket klåda och sover dåligt'],
+    sos:['Barnet har utslag som inte bleknar när du trycker ett glas mot huden och verkar sjukt'], a:['hud']},
+  {id:'tander', e:'🦷', t:'Tänder', k:'tänder tand tandsprickning tandborstning', intro:'Tänderna kommer i olika takt. Dregel, bitande och lite gnäll är vanligt när en tand är på väg.',
+    ok:['Att första tanden kommer först runt ett år','Att barnet dreglar mycket'],
+    care:['Barnet har hög feber – det beror inte på tänderna','Tandköttet är svullet och barnet verkar ha mycket ont'], a:['tander']},
+  {id:'utv', e:'🧠', t:'Utveckling', k:'utveckling kryper går pratar sitter rullar', intro:'Barn utvecklas olika snabbt, och det finns ett stort spann för vad som är normalt. BVC följer barnets utveckling.',
+    ok:['Att hoppa över ett steg, som att krypa','Att vara tidig med en sak och senare med en annan'],
+    care:['Barnet slutar göra något som det redan har kunnat','Du är orolig för barnets syn eller hörsel','Du undrar över något – BVC hjälper gärna till'], a:['dev','lek']},
+  {id:'fel', e:'❤️', t:'Något känns fel', k:'orolig fel ledsen känns fel nedstämd', intro:'Du känner ditt barn bäst. Om något känns fel är det alltid okej att söka hjälp – även om du inte kan sätta ord på vad det är.',
+    care:['Du är orolig för ditt barn – ring 1177 för rådgivning dygnet runt','Du mår inte bra själv – prata med BVC, barnmorskan eller vårdcentralen'],
+    sos:['Barnet har svårt att andas, är slappt eller svårt att väcka','Du har tankar på att skada dig själv eller barnet'], a:['fjarde']}
+];
+
+/* ---------------- DATA: checklistor ---------------- */
+const LIST_DEFS = [
+  {id:'bb', e:'👜', t:'BB-väskan', sec:'grav', d:'Många packar runt vecka 35.', g:{
+    'Till bebisen':['Body och byxor, 2–3 set','Mössa','Filt','Blöjor','Napp, om ni vill använda','Babyskydd monterat i bilen','Ytterkläder för hemfärden'],
+    'Till mamman':['Amnings-BH','Tofflor','Necessär','Bekväma kläder att åka hem i','Stora bindor och nätbyxor','Amningsinlägg'],
+    'Dokument & övrigt':['Legitimation','Förlossningsbrev','Mobilladdare med lång sladd','Något att äta och dricka']}},
+  {id:'v30', e:'📅', t:'Från vecka 30', sec:'grav', d:'Det praktiska inför de sista veckorna.', g:{
+    'Att ordna':['Skriv förlossningsbrev','Montera babyskyddet i bilen','Tvätta bebiskläderna','Spara förlossningens telefonnummer i mobilen','Bestäm vem som tar hand om syskon eller husdjur','Anmäl föräldraledighet till arbetsgivaren']}},
+  {id:'sista', e:'⏳', t:'Sista månaden', sec:'grav', d:'Små saker som gör de första veckorna lättare.', g:{
+    'Hemma':['Förbered en sovplats för bebisen','Fyll på frysen med enkel mat','Köp blöjor och tvättlappar','Ladda ner Försäkringskassans och 1177:s appar'],
+    'Inför förlossningen':['Planera hur ni tar er till förlossningen','Ställ BB-väskan vid dörren','Gå igenom förlossningsbrevet tillsammans']}},
+  {id:'barnsakring', e:'🛡️', t:'Barnsäkra hemmet', sec:'0-1', d:'När barnet börjar krypa och resa sig.', g:{
+    'Kök & badrum':['Förvara rengöringsmedel högt upp eller i låst skåp','Spisskydd, och vänd kastrullhandtag inåt','Förvara läkemedel oåtkomligt'],
+    'Vardagsrum & sovrum':['Fäst bokhyllor och byråar i väggen','Skydd i eluttag','Gardinsnören utom räckhåll','Grind vid trappor'],
+    'Bra att ha':['Spara Giftinformationscentralens nummer: 010-456 67 00','Fungerande brandvarnare på varje våning']}},
+  {id:'flytta', e:'🏡', t:'Flytta hemifrån', sec:'16-18', d:'Att gå igenom tillsammans med ditt barn.', g:{
+    'Boende':['Hyreskontrakt','Hemförsäkring','El','Internet','Folkbokföring – anmäl flytt till Skatteverket'],
+    'Ekonomi':['Bank','Budget'],
+    'Hemmet':['Möbler','Köksutrustning','Städgrejer','Första hjälpen']}}
+];
+const OWN = 'Mina egna';
+
+/* ---------------- DATA: jämför ----------------
+   Exempeldata för prototypen. Priser är ungefärliga cirkapriser.
+   ------------------------------------------------ */
+const NEEDS = {billig:'Billig', rengor:'Enkel att rengöra', latt:'Lätt', liten:'Tar liten plats', sma:'Bra för små utrymmen', nyfodd:'Passar nyfödd', storre:'Passar större barn'};
+const COMPARE = [
+  {id:'barnvagnar', e:'🛒', t:'Barnvagnar', k:'barnvagn vagn sittvagn liggvagn duovagn', needs:['billig','latt','liten','sma','nyfodd','storre','rengor'],
+   attrs:[['price','Pris'],['weight','Vikt'],['size','Hopfälld'],['age','Ålder'],['limit','Viktgräns']],
+   items:[
+    {id:'yoyo', b:'Babyzen', n:'YOYO²', price:'ca 6 500 kr', p:6500, weight:'ca 6 kg', size:'Mycket kompakt', age:'Från nyfödd med tillbehör', limit:'22 kg', f:['latt','liten','sma','nyfodd'], pro:['Mycket lätt och kompakt','Fälls ihop med en hand'], con:['Små hjul – sämre i grus och snö','Liten varukorg']},
+    {id:'nxt', b:'Emmaljunga', n:'NXT90 F', price:'ca 9 000 kr', p:9000, weight:'ca 13 kg', size:'Stor', age:'Från nyfödd (liggdel)', limit:'22 kg', f:['nyfodd','storre'], pro:['Stora hjul för skogsstig och snö','Rymlig liggdel'], con:['Tung att lyfta','Tar stor plats i bagageutrymmet']},
+    {id:'balios', b:'Cybex', n:'Balios S Lux', price:'ca 6 000 kr', p:6000, weight:'ca 10 kg', size:'Medel', age:'Från nyfödd med liggdel', limit:'22 kg', f:['billig','nyfodd','rengor'], pro:['Bra pris för en kombivagn','Sittdelen kan vändas åt båda hållen'], con:['Liggdelen kostar extra','Mellanstora hjul']},
+    {id:'fox', b:'Bugaboo', n:'Fox 5', price:'ca 13 000 kr', p:13000, weight:'ca 12 kg', size:'Medel', age:'Från nyfödd', limit:'22 kg', f:['nyfodd','storre','rengor'], pro:['Mjuk fjädring','Klädseln går att ta av och tvätta'], con:['Högt pris','Relativt tung']},
+    {id:'glide', b:'Thule', n:'Urban Glide 3', price:'ca 7 500 kr', p:7500, weight:'ca 11 kg', size:'Medel', age:'Från 6 mån (sittdel)', limit:'22 kg', f:['storre'], pro:['Byggd för löpning och långa promenader','Handbroms'], con:['Tre hjul tar plats','Nyfödd kräver tillbehör']}]},
+  {id:'barselar', e:'🤱', t:'Bärselar', k:'bärsele bärselar bära sjal bärsjal nyfödd', needs:['billig','latt','liten','nyfodd','storre','rengor'],
+   attrs:[['price','Pris'],['age','Ålder'],['limit','Viktspann'],['material','Material'],['pos','Bärpositioner']],
+   items:[
+    {id:'harmony', b:'BabyBjörn', n:'Harmony', price:'ca 2 000 kr', p:2000, age:'Från nyfödd', limit:'ca 3,2–15 kg', material:'Luftig mesh', pos:'Fram, utåt, rygg', f:['nyfodd','rengor','latt'], pro:['Luftigt material','Enkel att ta på'], con:['Högre pris']},
+    {id:'omni', b:'Ergobaby', n:'Omni Breeze', price:'ca 2 300 kr', p:2300, age:'Från nyfödd', limit:'ca 3,2–20 kg', material:'Luftig mesh', pos:'Fram, utåt, höft, rygg', f:['nyfodd','storre','rengor'], pro:['Fyra bärpositioner','Räcker länge upp i åldrarna'], con:['Många spännen att lära sig']},
+    {id:'manduca', b:'Manduca', n:'XT', price:'ca 1 700 kr', p:1700, age:'Från nyfödd', limit:'ca 3,5–20 kg', material:'Ekologisk bomull', pos:'Fram, utåt, höft, rygg', f:['nyfodd','storre'], pro:['Justeras steglöst efter barnets storlek','Rygg- och höftbärning'], con:['Kan bli varm på sommaren']},
+    {id:'caboo', b:'Close', n:'Caboo', price:'ca 800 kr', p:800, age:'Från nyfödd', limit:'Främst första månaderna', material:'Elastisk trikå', pos:'Fram', f:['billig','nyfodd','liten','latt'], pro:['Mjuk och nära, som en sjal','Liten att packa ner'], con:['Passar främst de första månaderna','Kan bli varm']}]},
+  {id:'babyskydd', e:'🚗', t:'Babyskydd', k:'babyskydd bilbarnstol bilstol bil bakåtvänd', needs:['billig','latt','nyfodd','rengor'],
+   attrs:[['price','Pris'],['age','Barnets längd'],['weight','Vikt skydd'],['base','Bas'],['extra','Särskilt']],
+   items:[
+    {id:'besafe', b:'BeSafe', n:'Go Beyond', price:'ca 3 300 kr', p:3300, age:'ca 40–87 cm', weight:'ca 3,5 kg', base:'Isofix-bas (tillval)', extra:'Lång användningstid', f:['nyfodd','latt'], pro:['Används länge','Lätt att bära'], con:['Basen kostar extra']},
+    {id:'cloud', b:'Cybex', n:'Cloud T i-Size', price:'ca 4 000 kr', p:4000, age:'ca 45–87 cm', weight:'ca 4,9 kg', base:'Isofix-bas (tillval)', extra:'Kan fällas till liggläge', f:['nyfodd','rengor'], pro:['Liggläge när skyddet står i vagnen','Tvättbar klädsel'], con:['Tyngre att bära']},
+    {id:'pebble', b:'Maxi-Cosi', n:'Pebble 360 Pro', price:'ca 3 800 kr', p:3800, age:'ca 40–83 cm', weight:'ca 4,6 kg', base:'Vridbar bas (tillval)', extra:'Vrids mot dörren', f:['nyfodd'], pro:['Lätt att lyfta in och ut','Passar många vagnar'], con:['Kortare användningstid än vissa']},
+    {id:'babysafe', b:'Britax Römer', n:'Baby-Safe Pro', price:'ca 2 500 kr', p:2500, age:'ca 40–85 cm', weight:'ca 4 kg', base:'Bälte eller bas (tillval)', extra:'Bra pris', f:['billig','nyfodd'], pro:['Prisvärt','Enkel att montera med bälte'], con:['Färre extrafunktioner']}]},
+  {id:'barnstolar', e:'🪑', t:'Barnstolar', k:'barnstol matstol stol äta', needs:['billig','rengor','latt','sma','storre'],
+   attrs:[['price','Pris'],['age','Ålder'],['material','Material'],['size','Storlek'],['extra','Särskilt']],
+   items:[
+    {id:'antilop', b:'IKEA', n:'Antilop', price:'ca 200 kr', p:200, age:'Från ca 6 mån', material:'Plast och stål', size:'Tar isär snabbt', extra:'Bricka ingår', f:['billig','rengor','latt'], pro:['Mycket prisvärd','Lätt att torka av och ta isär'], con:['Går inte att justera','Används främst de första åren']},
+    {id:'tripp', b:'Stokke', n:'Tripp Trapp', price:'ca 2 800 kr', p:2800, age:'Från ca 6 mån med babyset', material:'Trä', size:'Liten golvyta', extra:'Växer med barnet', f:['sma','storre'], pro:['Kan användas i många år','Barnet sitter vid bordet med familjen'], con:['Babyset och bricka kostar extra','Fler skrymslen att rengöra']},
+    {id:'bbstol', b:'BabyBjörn', n:'Barnstol', price:'ca 2 000 kr', p:2000, age:'Från ca 8 mån', material:'Plast', size:'Liten golvyta', extra:'Bricka fälls in', f:['rengor','sma'], pro:['Hela stolen går att torka av','Tar liten plats'], con:['Används främst de första åren']}]}
+];
+const COMPARE_SOON = ['Gravidförsäkringar','Barnförsäkringar','Babyvakter','Bilbarnstolar','Babysängar','Resesängar','Nappar','Flaskor','Blöjor','Hudvård','Cykelhjälmar','Ytterkläder','Regnkläder','Skor'];
+
+/* ---------------- DATA: recept ---------------- */
+const RECIPES = [
+  {id:'morot', e:'🥕', t:'Slät morotspuré', age:4, min:20, veg:true, frys:true, ing:['2 morötter','Vatten'], al:[], steps:['Skala och skär morötterna i bitar.','Koka dem mjuka i lite vatten, cirka 15 minuter.','Mixa slätt. Späd med kokvattnet, bröstmjölk eller ersättning.','Servera ljummen. Frys resten i isbitsformar.'], tip:'Blanda senare med potatis och några droppar rapsolja för mer energi.'},
+  {id:'avokado', e:'🥑', t:'Avokado- och bananmos', age:6, min:5, veg:true, frys:false, ing:['½ mogen avokado','½ banan'], al:[], steps:['Mosa avokado och banan med en gaffel.','Gör mosen slät i början och grövre efter hand.'], tip:'Gör mosen precis innan – den mörknar snabbt.'},
+  {id:'grot', e:'🍐', t:'Havregrynsgröt med päron', age:6, min:10, veg:true, frys:true, ing:['1 dl havregryn','2 dl vatten','½ päron'], al:['gluten'], steps:['Koka havregryn och vatten under omrörning i 3–5 minuter.','Riv eller mosa päronet och rör ner.','Låt svalna till ljummen.'], tip:'Välj glutenfria havregryn om barnet inte tål gluten.'},
+  {id:'lins', e:'🍲', t:'Mild linsgryta', age:8, min:30, veg:true, frys:true, ing:['1 dl röda linser','1 morot','½ gul lök','1 dl krossade tomater','2 dl vatten','1 msk rapsolja'], al:[], steps:['Fräs finhackad lök och riven morot i oljan.','Tillsätt sköljda linser, tomater och vatten.','Koka under lock i cirka 20 minuter tills linserna är mjuka.','Mixa eller mosa till lagom konsistens.'], tip:'Passar hela familjen – smaksätt de vuxnas portioner efteråt.'},
+  {id:'omelett', e:'🍳', t:'Omelettstrimlor', age:8, min:10, veg:true, frys:false, ing:['1 ägg','1 msk vatten','Lite rapsolja'], al:['ägg'], steps:['Vispa ägget med vattnet.','Stek på medelvärme tills omeletten är helt genomstekt.','Skär i fingertjocka strimlor som barnet kan hålla i.'], tip:'Ägg ska alltid vara genomstekt eller genomkokt till små barn.'},
+  {id:'lax', e:'🐟', t:'Små laxbiffar', age:9, min:25, veg:false, frys:true, ing:['150 g laxfilé','1 kokt potatis','1 ägg','1 msk dill'], al:['fisk','ägg'], steps:['Mosa potatisen och blanda med finfördelad rå lax, ägg och dill.','Forma små biffar.','Stek på medelvärme i några minuter per sida tills de är genomstekta.'], tip:'Känn noga efter ben i fisken.'},
+  {id:'plattar', e:'🍌', t:'Bananplättar utan ägg', age:9, min:15, veg:true, frys:true, ing:['1 mogen banan','1 dl havregryn','½ dl vatten'], al:['gluten'], steps:['Mixa alla ingredienser till en smet.','Stek små plättar på medelvärme, ett par minuter per sida.','Låt svalna och servera som plockmat.'], tip:'Frys plättarna styckvis och värm dem i brödrost eller mikro.'}
+];
+const RFILTERS = {age:'Passar åldern', snabb:'Högst 15 min', veg:'Vegetariskt', frys:'Kan frysas', fa:'Få ingredienser', utanagg:'Utan ägg', utanfisk:'Utan fisk', utangluten:'Utan gluten'};
+
+/* ---------------- STATE ---------------- */
+const KEY = 'hjalp-en-foralder-v1';
+let S = loadState();
+const UI = {ob:0, obType:'born', edit:{}, needs:{}, sel:{}, rf:{age:true}, q:'', confirmReset:false, err:'', newList:false, childType:null, lastDel:null};
+let stack = [{r:'home'}];
+
+function blankState(){ return {onboarded:false, parent:'', children:[], active:null, lists:{}, todos:{}, order:[]}; }
+function loadState(){
+  try{ const raw = localStorage.getItem(KEY); if(raw){ const s = JSON.parse(raw); if(s && s.children) return Object.assign(blankState(), s); } }catch(e){}
+  return blankState();
+}
+function persist(){
+  try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){}
+  UI.pulse = true;
+  const el = document.getElementById('savedFlag'); if(el){ el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse'); }
+}
+function uid(p){ return p + Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+
+function demoState(){
+  const s = blankState();
+  s.onboarded = true; s.parent = 'Anna';
+  s.children = [
+    {id:'elsa', name:'Elsa', type:'born', date:'2026-02-20'},
+    {id:'leo', name:'Leo', type:'born', date:'2022-05-11'}];
+  s.active = 'elsa';
+  const bsk = makeList(LIST_DEFS.find(l=>l.id==='barnsakring'));
+  bsk.items.forEach((it,i)=>{ if(i<3) it.done = true; });
+  bsk.items.push({id:uid('c'), text:'Hörnskydd på soffbordet', done:false, custom:true, g:OWN});
+  s.lists.barnsakring = bsk;
+  const bb = makeList(LIST_DEFS[0]); bb.items.forEach(it=>it.done=true);
+  bb.items.push({id:uid('c'), text:'Min egen kudde', done:true, custom:true, g:OWN},{id:uid('c'), text:'Favoritsnacks', done:true, custom:true, g:OWN});
+  s.lists.bb = bb;
+  const own = {id:'eget-inskolning', e:'🎒', t:'Inskolning på förskolan', sec:null, builtin:false, items:[
+    {id:uid('c'), text:'Extrakläder märkta med namn', done:true, custom:true, g:OWN},
+    {id:uid('c'), text:'Regnkläder och stövlar', done:false, custom:true, g:OWN},
+    {id:uid('c'), text:'Gosedjur till vilan', done:false, custom:true, g:OWN},
+    {id:uid('c'), text:'Blöjor och våtservetter', done:false, custom:true, g:OWN},
+    {id:uid('c'), text:'Boka ledigt från jobbet första veckan', done:true, custom:true, g:OWN}]};
+  s.lists[own.id] = own; s.order = [own.id];
+  s.todos['elsa:bvc8'] = true;
+  return s;
+}
+
+/* ---------------- HELPERS ---------------- */
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const today = () => { const d = new Date(); return new Date(d.getFullYear(), d.getMonth(), d.getDate()); };
+const parseD = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); };
+const isoToday = () => { const d = today(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); };
+const fmtDate = s => parseD(s).toLocaleDateString('sv-SE', {day:'numeric', month:'long', year:'numeric'});
+
+function ageInfo(c){
+  if(!c) return null;
+  const t = today();
+  if(c.type === 'expecting'){
+    const days = Math.round((parseD(c.date) - t)/864e5);
+    const w = Math.max(1, Math.min(42, Math.floor((280 - days)/7) + 1));
+    return {kind:'grav', sec:'grav', period:null, week:w, days, label: days >= 0 ? `Graviditetsvecka ${w}` : 'Beräknat datum har passerat', key:'grav'};
+  }
+  const b = parseD(c.date);
+  let m = (t.getFullYear()-b.getFullYear())*12 + (t.getMonth()-b.getMonth()); if(t.getDate() < b.getDate()) m--; m = Math.max(0, m);
+  const days = Math.floor((t - b)/864e5);
+  let label;
+  if(m < 1){ const w = Math.floor(days/7); label = w < 1 ? `${days} ${days===1?'dag':'dagar'}` : `${w} ${w===1?'vecka':'veckor'}`; }
+  else if(m < 12) label = `${m} ${m===1?'månad':'månader'}`;
+  else if(m < 24) label = m===12 ? '1 år' : `1 år och ${m-12} mån`;
+  else label = `${Math.floor(m/12)} år`;
+  const sec = m<12?'0-1': m<72?'1-5': m<120?'6-9': m<156?'10-12': m<192?'13-15':'16-18';
+  const period = sec==='0-1' ? Math.min(3, Math.floor(m/3)) : sec==='1-5' ? Math.min(4, Math.max(0, Math.floor(m/12)-1)) : null;
+  return {kind:'born', months:m, label, sec, period, key: sec==='0-1' ? 'p'+period : sec};
+}
+const activeChild = () => S.children.find(c=>c.id===S.active) || S.children[0] || null;
+
+function makeList(def){
+  const items = [];
+  Object.entries(def.g).forEach(([g, arr]) => arr.forEach((text,i) => items.push({id:def.id+'-'+g.slice(0,3)+i, text, done:false, custom:false, g})));
+  return {id:def.id, e:def.e, t:def.t, sec:def.sec, d:def.d, builtin:true, items};
+}
+function getList(id){
+  if(S.lists[id]) return S.lists[id];
+  const def = LIST_DEFS.find(l=>l.id===id); if(!def) return null;
+  return makeList(def);
+}
+function ensureList(id){ if(!S.lists[id]){ const l = getList(id); if(l) S.lists[id] = l; } return S.lists[id]; }
+function allLists(){ return [...LIST_DEFS.map(d=>getList(d.id)), ...S.order.map(id=>S.lists[id]).filter(Boolean)]; }
+const progress = l => { const n = l.items.length, d = l.items.filter(i=>i.done).length; return {n, d, pct: n ? Math.round(d/n*100) : 0}; };
+function groupsOf(l){
+  if(!l.builtin) return [OWN];
+  const def = LIST_DEFS.find(d=>d.id===l.id);
+  return [...Object.keys(def ? def.g : {}), OWN];
+}
+
+function readMin(a){ const words = JSON.stringify(a.blocks).split(/\s+/).length + a.ingress.split(/\s+/).length; return Math.max(1, Math.round(words/170)); }
+function artMeta(a){
+  const sec = SEC(a.sec);
+  const cat = CATS01.find(c=>c.id===a.cat);
+  return {sec, cat, crumb: [sec ? (sec.id==='grav' ? 'Graviditet' : sec.t) : '', cat && a.sec==='0-1' ? cat.t : (a.sec==='1-5' ? 'Vardag' : '')].filter(Boolean).join(' · ')};
+}
+
+/* ---------------- KOMPONENTER ---------------- */
+function topbar(title){
+  const prev = stack.length > 1 ? titleOf(stack[stack.length-2]) : '';
+  return `<header class="top">
+    ${stack.length>1 ? `<button class="back" data-act="back" aria-label="Tillbaka till ${esc(prev)}">${icon('back',22)}<span>${esc(prev)}</span></button>` : '<span class="spacer44"></span>'}
+    <div class="top-t">${esc(title)}</div>
+    <button class="icon-btn" data-go="search" aria-label="Sök">${icon('search')}</button>
+  </header>`;
+}
+function row({e, t, s, go, badge, tint, right}){
+  return `<button class="row" data-go="${go}">
+    <span class="ico" ${tint?`style="background:var(${tint})"`:''}>${e}</span>
+    <span class="row-b"><span class="row-t">${esc(t)}</span>${s?`<span class="row-s">${esc(s)}</span>`:''}</span>
+    ${badge||''}${right||''}<span class="chev">${icon('chev',20)}</span></button>`;
+}
+function progBar(p){ return `<div class="prog ${p.pct===100?'done':''}" role="progressbar" aria-valuenow="${p.pct}" aria-valuemin="0" aria-valuemax="100" aria-label="${p.d} av ${p.n} klara"><i style="width:${p.pct}%"></i></div>`; }
+function listCard(l){
+  const p = progress(l);
+  return `<button class="card lcard" data-go="list|${l.id}">
+    <span class="lcard-h"><span class="ico sm">${l.e}</span><span class="row-b"><span class="row-t">${esc(l.t)}</span><span class="row-s">${p.d} av ${p.n} klara</span></span>${p.pct===100?'<span class="badge green">Klar</span>':''}</span>
+    ${progBar(p)}</button>`;
+}
+function artRow(id){
+  const a = ARTICLES[id]; if(!a) return '';
+  return row({e:a.e||'📄', t:a.title, s:`${readMin(a)} min läsning · ${a.src.map(k=>SRC[k].n).join(', ')}`, go:'article|'+id});
+}
+function listRow(id){
+  const l = getList(id); const p = progress(l);
+  return row({e:l.e, t:l.t, s:`Checklista · ${p.d} av ${p.n} klara`, go:'list|'+id});
+}
+function callouts(b){
+  if(b.ok) return `<div class="callout ok"><h3>✓ Det kan vara helt normalt</h3><ul>${b.ok.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`;
+  if(b.care) return `<div class="callout care"><h3>☎︎ ${CARE}</h3><ul>${b.care.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`;
+  if(b.sos) return `<div class="callout sos"><h3>Ring 112 direkt om</h3><ul>${b.sos.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`;
+  return '';
+}
+function contacts(){
+  return `<div class="contacts">
+    <a class="contact" href="tel:1177"><strong>1177</strong><span>Sjukvårdsrådgivning dygnet runt</span></a>
+    <a class="contact sos" href="tel:112"><strong>112</strong><span>Vid akut fara för liv och hälsa</span></a>
+  </div>`;
+}
+function sourceBox(a){
+  return `<div class="src"><span><b>Källa:</b> ${a.src.map(k=>`<a href="${SRC[k].u}" target="_blank" rel="noopener">${SRC[k].n}</a>`).join(', ')}</span>
+    <span><b>Senast uppdaterad:</b> september 2026</span>
+    <span class="small">Prototyptext baserad på källans råd. Faktagranskas mot källan före lansering.</span></div>`;
+}
+function renderBlocks(bl){
+  return bl.map(b=>{
+    if(b.h) return `<h2>${esc(b.h)}</h2>`;
+    if(b.p) return `<p>${esc(b.p)}</p>`;
+    if(b.ul) return `<ul>${b.ul.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`;
+    if(b.ol) return `<ol>${b.ol.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>`;
+    if(b.tip) return `<div class="callout tip"><h3>💡 Bra att veta</h3><p>${esc(b.tip)}</p></div>`;
+    if(b.callout) return `<div class="callout care"><h3>☎︎ Viktigt</h3><p>${esc(b.callout)}</p></div>`;
+    if(b.timeline) return `<div class="tl">${b.timeline.map(x=>`<div class="tl-i"><div class="tl-dot"><i></i><b></b></div><div class="tl-c"><strong>${esc(x.t)}</strong><span>${esc(x.d)}</span></div></div>`).join('')}</div>`;
+    if(b.swatch) return `<div class="sw">${b.swatch.map(x=>`<div class="sw-i"><i style="background:${x.c}"></i><div class="row-b"><span class="row-t">${esc(x.n)} ${x.ok?'<span class="badge green">Ofta normalt</span>':'<span class="badge peach">Kontakta vården</span>'}</span><span class="row-s">${esc(x.d)}</span></div></div>`).join('')}</div>`;
+    return callouts(b);
+  }).join('');
+}
+
+/* ---------------- VYER ---------------- */
+const V = {};
+function titleOf(r){
+  switch(r.r){
+    case 'home': return 'Hem'; case 'explore': return 'Utforska'; case 'lists': return 'Checklistor'; case 'compare': return 'Jämför'; case 'profile': return 'Profil';
+    case 'section': { const s = SEC(r.a); return s ? (s.id==='grav'?'Graviditet':s.t) : ''; }
+    case 'category': { const c = CATS01.find(c=>c.id===r.b); return c ? c.t : ''; }
+    case 'article': return ARTICLES[r.a] ? ARTICLES[r.a].title : 'Artikel';
+    case 'help': return 'Jag behöver hjälp';
+    case 'helpItem': { const h = HELP.find(h=>h.id===r.a); return h ? h.t : ''; }
+    case 'list': { const l = getList(r.a) || S.lists[r.a]; return l ? l.t : 'Checklista'; }
+    case 'compareCat': case 'compareTable': { const c = COMPARE.find(c=>c.id===r.a); return c ? c.t : 'Jämför'; }
+    case 'recipes': return 'Recept'; case 'recipe': { const x = RECIPES.find(x=>x.id===r.a); return x ? x.t : 'Recept'; }
+    case 'search': return 'Sök'; case 'childForm': return r.a ? 'Redigera barn' : 'Lägg till barn';
+  }
+  return '';
+}
+
+/* ----- Hem ----- */
+V.home = () => {
+  const c = activeChild(); const ai = ageInfo(c);
+  const name = S.parent ? `Hej ${esc(S.parent)} 👋` : 'Hej! 👋';
+  let hero = '';
+  if(!c){
+    hero = `<div class="hero"><div class="hero-h"><span class="ico">👶</span><div><div class="hero-name">Lägg till ditt barn</div><p class="muted">Så anpassar vi innehållet efter åldern.</p></div></div><button class="btn" data-go="childForm">Lägg till barn</button></div>`;
+  } else if(ai.kind==='grav'){
+    const w = ai.week;
+    const tri = w<=13 ? {t:'Första trimestern', d:'Många känner sig trötta och illamående. Boka in dig hos barnmorskemottagningen om du inte redan gjort det.'}
+      : w<=27 ? {t:'Andra trimestern', d:'Många får mer energi. Magen växer, och många känner de första sparkarna.'}
+      : {t:'Tredje trimestern', d:'Kroppen förbereder sig. Nu är det dags att packa BB-väskan och skriva förlossningsbrev.'};
+    hero = `<div class="hero" style="background:var(--t-grav)">
+      <div class="hero-h"><span class="ico">🤰</span><div><div class="hero-name">${esc(c.name)} – vecka ${w}</div><p class="muted small">${ai.days>=0 ? `Beräknat datum ${fmtDate(c.date)} · ${ai.days} dagar kvar` : 'Beräknat datum har passerat'}</p></div></div>
+      <div class="now">
+        <button class="row" data-go="article|g-ordna"><span class="row-b"><span class="row-t">🧠 Just nu · ${tri.t}</span><span class="row-s">${tri.d}</span></span><span class="chev">${icon('chev',18)}</span></button>
+        <button class="row" data-go="article|bb-tidslinje"><span class="row-b"><span class="row-t">🕊️ Inför förlossningen</span><span class="row-s">Så kan första timmarna och dagarna se ut.</span></span><span class="chev">${icon('chev',18)}</span></button>
+      </div>
+      <button class="btn" data-go="section|grav">Allt om graviditet & förlossning</button></div>`;
+  } else {
+    const s = SEC(ai.sec);
+    if(ai.sec==='0-1'){
+      const n = NOW01[ai.period];
+      hero = `<div class="hero" style="background:var(${s.tint})">
+        <div class="hero-h"><span class="ico">${s.e}</span><div><div class="hero-name">${esc(c.name)} – ${esc(ai.label)}</div><p class="muted small">Perioden ${s.periods[ai.period].replace('mån','månader')}</p></div></div>
+        <div class="now">
+          <button class="row" data-go="article|${n.a[0]}"><span class="row-b"><span class="row-t">🧠 Just nu</span><span class="row-s">${esc(n.dev)}</span></span><span class="chev">${icon('chev',18)}</span></button>
+          <button class="row" data-go="article|${n.a[1]}"><span class="row-b"><span class="row-t">🍌 Mat</span><span class="row-s">${esc(n.mat)}</span></span><span class="chev">${icon('chev',18)}</span></button>
+          <button class="row" data-go="article|${n.a[2]}"><span class="row-b"><span class="row-t">😴 Sömn</span><span class="row-s">${esc(n.somn)}</span></span><span class="chev">${icon('chev',18)}</span></button>
+        </div>
+        <button class="btn" data-go="section|0-1|${ai.period}">Allt om ${s.periods[ai.period].replace('mån','månader')}</button></div>`;
+    } else {
+      hero = `<div class="hero" style="background:var(${s.tint})">
+        <div class="hero-h"><span class="ico">${s.e}</span><div><div class="hero-name">${esc(c.name)} – ${esc(ai.label)}</div><p class="muted small">${esc(s.s)}</p></div></div>
+        <button class="btn" data-go="section|${s.id}${ai.period!=null?'|'+ai.period:''}">Allt om ${esc(s.t)}</button></div>`;
+    }
+  }
+  const kids = S.children.length > 1 ? `<div class="kids" role="group" aria-label="Välj barn">${S.children.map(k=>{const i=ageInfo(k);return `<button class="kid" data-act="setChild" data-id="${k.id}" aria-pressed="${k.id===(c&&c.id)}"><span class="dot">${k.type==='expecting'?'🤰':esc(k.name[0])}</span>${esc(k.name)} · ${esc(i.kind==='grav'?'v. '+i.week:i.label)}</button>`}).join('')}<button class="kid" data-go="childForm" aria-label="Lägg till barn"><span class="dot">${icon('plus',16)}</span>Lägg till</button></div>` : '';
+
+  const tkey = ai ? ai.key : null;
+  const todos = (tkey && TODOS[tkey]) || [];
+  const todoHtml = todos.length ? `<section class="stack"><div class="sec-h"><h2>📋 Att göra nu</h2><span class="muted small">${todos.filter(t=>S.todos[c.id+':'+t.id]).length} av ${todos.length} klara</span></div>
+    <div class="list">${todos.map(t=>{const done=!!S.todos[c.id+':'+t.id];return `<div class="todo ${done?'done':''}">
+      <button class="chk ${done?'on':''}" data-act="toggleTodo" data-id="${t.id}" role="checkbox" aria-checked="${done}" aria-label="Markera ${esc(t.t)} som klar">${icon('check',16)}</button>
+      <span class="row-b" data-go="${t.go}"><span class="row-t">${t.e} ${esc(t.t)}</span><span class="row-s">${esc(t.s)}</span></span>
+      <button class="mini" data-go="${t.go}" aria-label="Läs mer om ${esc(t.t)}">${icon('chev',18)}</button></div>`}).join('')}</div></section>` : '';
+
+  const quick = [['🍼','Mat & amning','helpItem|mat'],['😴','Sömn','helpItem|somn'],['🤒','Sjukdom','helpItem|sjuk'],['💩','Mage & bajs','helpItem|bajs'],['🧠','Utveckling','helpItem|utv']];
+  const relevant = allLists().filter(l => (ai && l.sec===ai.sec) || !l.builtin || (S.lists[l.id] && progress(l).d>0 && progress(l).pct<100)).slice(0,3);
+  const maybe = (tkey && MAYBE[tkey]) || [];
+
+  return `<div class="view">
+    <div class="home-top"><span class="brand">${LOGO(30)} Hjälp en förälder</span><button class="avatar" data-tab-go="profile" aria-label="Profil">${esc((S.parent||'?')[0].toUpperCase())}</button></div>
+    <div class="hello"><h1>${name}</h1><p class="lead">Vad behöver du hjälp med idag?</p></div>
+    ${kids}
+    ${hero}
+    <button class="searchbar" data-go="search">${icon('search')}<span>Sök bland allt – t.ex. ”bajsar grönt”</span></button>
+    <button class="helpbtn" data-go="help"><span class="ico">🆘</span><span class="row-b"><b>Jag behöver hjälp</b><span class="row-s">Lugn vägledning – och när du bör kontakta vården</span></span><span class="chev">${icon('chev',20)}</span></button>
+    ${todoHtml}
+    <section class="stack"><h2>⚡ Snabb hjälp</h2><div class="quick">${quick.map(q=>`<button class="qbtn" data-go="${q[2]}"><span class="e">${q[0]}</span>${q[1]}</button>`).join('')}</div></section>
+    <section class="stack"><div class="sec-h"><h2>✅ Mina checklistor</h2><button class="link" data-tab-go="lists">Alla</button></div><div class="grid2">${relevant.map(listCard).join('')}</div></section>
+    ${maybe.length ? `<section class="stack"><h2>🛍️ Kan vara aktuellt</h2><div class="list">${maybe.map(m=>row({e:m[0], t:m[1], s:m[2].startsWith('compare')?'Jämför märken utifrån dina behov':m[2].startsWith('list')?'Checklista':'Filtrera efter barnets ålder', go:m[2]})).join('')}</div></section>` : ''}
+    <section class="stack"><div class="sec-h"><h2>📚 Utforska</h2><button class="link" data-tab-go="explore">Visa allt</button></div>
+      <div class="scroll-x">${SECTIONS.map(s=>`<button class="chip" data-go="section|${s.id}" ${ai&&ai.sec===s.id?'aria-pressed="true"':''}>${s.e} ${esc(s.id==='grav'?'Graviditet':s.t)}</button>`).join('')}</div></section>
+  </div>`;
+};
+
+/* ----- Utforska ----- */
+V.explore = () => {
+  const ai = ageInfo(activeChild());
+  return `<div class="view">
+    <div class="stack-s" style="padding-top:12px"><h1>Utforska</h1><p class="lead">Allt innehåll, från graviditet till 18 år.</p></div>
+    <button class="searchbar" data-go="search">${icon('search')}<span>Sök bland allt</span></button>
+    <div class="list">${SECTIONS.map(s=>row({e:s.e, t:s.t, s:s.s, go:'section|'+s.id, tint:s.tint, badge: ai&&ai.sec===s.id ? `<span class="badge">${esc(activeChild().name)}</span>` : (['6-9','10-12','13-15'].includes(s.id)?'<span class="badge grey">Kommer snart</span>':'')})).join('')}</div>
+    <section class="stack"><h2>Teman</h2><div class="list">
+      ${row({e:'🌙', t:'Fjärde trimestern', s:'De första tre månaderna efter födseln', go:'article|fjarde'})}
+      ${row({e:'🤱', t:'Amning & flaska', s:'Tag, mjölkstockning, ersättning', go:'section|grav'})}
+      ${row({e:'🥣', t:'Recept för små barn', s:'Filtrera på ålder, tid och allergier', go:'recipes'})}
+      ${row({e:'🆘', t:'Jag behöver hjälp', s:'Lugn vägledning när något känns fel', go:'help'})}
+    </div></section>
+  </div>`;
+};
+
+/* ----- Sektion ----- */
+V.section = r => {
+  const s = SEC(r.a); const ai = ageInfo(activeChild());
+  if(s.id==='grav') return sectionGrav(s, ai);
+  const pNow = r.b!=null ? +r.b : (ai && ai.sec===s.id && ai.period!=null ? ai.period : 0);
+  let body = '';
+  if(s.id==='0-1'){
+    const n = NOW01[pNow];
+    body = `<p class="lead">${esc(n.dev)}</p>
+      <section class="stack"><h2>Välj ämne</h2><div class="cats">${CATS01.map(c=>{const cnt = catArticles('0-1',c.id,pNow).length; return `<button class="cat" data-go="category|0-1|${c.id}|${pNow}"><span class="ico" style="background:var(${s.tint})">${c.e}</span><span class="row-b"><span class="row-t">${c.t}</span><span class="row-s">${cnt} ${cnt===1?'artikel':'artiklar'}</span></span></button>`}).join('')}</div></section>
+      <section class="stack"><h2>Särskilt för perioden</h2><div class="list">
+        ${pNow===0 ? artRow('fjarde') + artRow('skrik') : ''}
+        ${pNow>=1 ? artRow('smakportioner') + row({e:'🥣', t:'Recept', s:'Anpassade efter åldern', go:'recipes'}) : ''}
+        ${pNow>=2 ? listRow('barnsakring') + artRow('forskola') : ''}
+      </div></section>`;
+  } else if(s.id==='1-5'){
+    const topics = UPCOMING['1-5'].byPeriod[pNow];
+    body = `<section class="stack"><h2>Tillgängligt nu</h2><div class="list">${pNow<=3?artRow('pott'):''}${artRow('tander')}</div></section>
+      <section class="stack"><div class="sec-h"><h2>Ämnen för ${s.periods[pNow]}</h2><span class="badge grey">Under uppbyggnad</span></div><div class="soon">${topics.map(t=>`<span>${esc(t)}</span>`).join('')}</div>
+      <p class="muted small">Vi bygger ut den här delen. Gemensamma ämnen: potträning, nattrutiner, trots, känslor och förskola.</p></section>`;
+  } else {
+    const up = UPCOMING[s.id];
+    body = `${s.id==='16-18' ? `<section class="stack"><h2>Tillgängligt nu</h2><div class="list">${listRow('flytta')}</div></section>` : ''}
+      <section class="stack"><div class="sec-h"><h2>Det här kommer</h2><span class="badge grey">Under uppbyggnad</span></div>
+      <div class="list">${up.cats.map(c=>`<div class="row"><span class="ico" style="background:var(${s.tint})">${c[0]}</span><span class="row-b"><span class="row-t">${c[1]}</span><span class="row-s">${c[2]}</span></span></div>`).join('')}</div>
+      ${['10-12','13-15'].includes(s.id)?'<p class="muted small">Här kommer vissa ämnen att finnas i två versioner: en för dig som förälder och en att läsa tillsammans med barnet.</p>':''}</section>`;
+  }
+  return `${topbar(s.t)}<div class="view">
+    <div class="shero" style="background:var(${s.tint})"><span class="eyebrow">Utforska</span><h1>${s.e} ${esc(s.t)}</h1><p class="muted">${esc(s.s)}</p></div>
+    ${s.periods ? `<div class="seg" role="group" aria-label="Välj ålder">${s.periods.map((p,i)=>`<button data-go-replace="section|${s.id}|${i}" aria-pressed="${i===pNow}">${p}${ai&&ai.sec===s.id&&ai.period===i?' •':''}</button>`).join('')}</div>` : ''}
+    ${body}</div>`;
+};
+function sectionGrav(s, ai){
+  const c = activeChild();
+  const wk = ai && ai.kind==='grav' ? `<span class="badge">${esc(c.name)} · vecka ${ai.week}</span>` : '';
+  return `${topbar('Graviditet')}<div class="view">
+    <div class="shero" style="background:var(${s.tint})"><span class="eyebrow">Utforska</span><h1>🤰 Graviditet & förlossning</h1><p class="muted">${esc(s.s)}</p>${wk}</div>
+    <button class="card row" data-go="article|bb-tidslinje" style="padding:16px"><span class="ico" style="background:var(--t-grav)">🕊️</span><span class="row-b"><span class="row-t">Tidslinje: från förlossning till hemgång</span><span class="row-s">Första 2 timmarna → första dygnet → dag 2 → hemgång</span></span><span class="chev">${icon('chev',20)}</span></button>
+    ${GRAV_GROUPS.map(g=>`<section class="stack"><h2>${g.t}</h2><div class="list">${g.items.map(x=>x.startsWith('a:')?artRow(x.slice(2)):listRow(x.slice(2))).join('')}${g.t==='Under graviditeten'?row({e:'⚖️', t:'Jämför gravidförsäkringar', s:'Kommer snart', go:'compare'}):''}</div></section>`).join('')}
+  </div>`;
+}
+function catArticles(sec, cat, p){ return Object.values(ARTICLES).filter(a=>a.sec===sec && a.cat===cat && a.periods.includes(+p)); }
+
+/* ----- Kategori ----- */
+V.category = r => {
+  const s = SEC(r.a), c = CATS01.find(x=>x.id===r.b), p = +r.c;
+  const arts = catArticles(r.a, r.b, p);
+  return `${topbar(c.t)}<div class="view">
+    <div class="stack-s"><div class="crumb"><button data-act="back">${esc(s.t)}</button><span>›</span><span>${s.periods[p]}</span></div>
+    <h1>${c.e} ${c.t}</h1><p class="lead">${esc(c.d)}</p></div>
+    <div class="seg" role="group" aria-label="Välj ålder">${s.periods.map((x,i)=>`<button data-go-replace="category|${r.a}|${r.b}|${i}" aria-pressed="${i===p}">${x}</button>`).join('')}</div>
+    ${arts.length ? `<div class="list">${arts.map(a=>artRow(a.id)).join('')}${r.b==='mat'&&p>=1?row({e:'🥣', t:'Recept', s:'Filtrera efter ålder och allergier', go:'recipes'}):''}${r.b==='sak'&&p>=2?listRow('barnsakring'):''}</div>`
+      : `<div class="note"><span>🌱</span><span><b>Inget innehåll här för ${s.periods[p]} än.</b> Prova en annan ålder ovanför, eller sök.</span></div>`}
+    <div class="note"><span>🩺</span><span>Om du är orolig för ditt barn kan du alltid ringa <b>1177</b> för sjukvårdsrådgivning, dygnet runt.</span></div>
+  </div>`;
+};
+
+/* ----- Artikel ----- */
+V.article = r => {
+  const a = ARTICLES[r.a]; const m = artMeta(a);
+  const related = Object.values(ARTICLES).filter(x=>x.id!==a.id && x.sec===a.sec && x.cat===a.cat && x.periods.some(p=>a.periods.includes(p))).slice(0,3);
+  const hasCare = a.blocks.some(b=>b.care||b.sos||b.callout);
+  return `${topbar(a.title)}<article class="view article">
+    <div class="stack-s"><span class="eyebrow">${esc(m.crumb)}</span><h1>${esc(a.title)}</h1>
+      <div class="meta"><span class="badge grey">${icon('clock',14)} ${readMin(a)} min</span><span class="badge green">Källa: ${a.src.map(k=>SRC[k].n).join(', ')}</span></div></div>
+    <p class="lead">${esc(a.ingress)}</p>
+    <div class="prose">${renderBlocks(a.blocks)}</div>
+    ${hasCare ? contacts() : ''}
+    ${a.list ? `<section class="stack"><h2>Checklista</h2>${listCard(getList(a.list))}</section>` : ''}
+    ${a.compare ? `<section class="stack"><h2>Jämför</h2><div class="list">${row({e:'⚖️', t: a.compare==='gravidforsakring'?'Jämför gravidförsäkringar':'Jämför babyskydd', s: a.compare==='gravidforsakring'?'Kommer snart':'Filtrera på det som är viktigt för dig', go: a.compare==='gravidforsakring'?'compare':'compareCat|'+a.compare})}</div></section>` : ''}
+    ${a.extra==='recipes' ? `<div class="list">${row({e:'🥣', t:'Recept som passar åldern', s:'Puréer, plockmat och familjemat', go:'recipes'})}</div>` : ''}
+    ${sourceBox(a)}
+    ${related.length ? `<section class="stack"><h2>Läs också</h2><div class="list">${related.map(x=>artRow(x.id)).join('')}</div></section>` : ''}
+  </article>`;
+};
+
+/* ----- Hjälp ----- */
+V.help = () => `${topbar('Jag behöver hjälp')}<div class="view">
+  <div class="stack-s"><h1>🆘 Jag behöver hjälp</h1><p class="lead">Välj det som stämmer bäst. Du får lugn, strukturerad information och tydliga råd om när du ska kontakta vården. Appen ställer inga diagnoser.</p></div>
+  <div class="callout sos"><h3>Vid akut fara – ring 112</h3><p>Till exempel om barnet har svårt att andas, är slappt eller svårt att väcka.</p></div>
+  <div class="list">${HELP.map(h=>row({e:h.e, t:h.t, go:'helpItem|'+h.id})).join('')}</div>
+  ${contacts()}
+</div>`;
+V.helpItem = r => {
+  const h = HELP.find(x=>x.id===r.a); const ai = ageInfo(activeChild());
+  const arts = h.a.map(id => id==='dev' ? (ai && ai.sec==='0-1' ? 'utv-'+ai.period : 'utv-2') : id);
+  return `${topbar(h.t)}<div class="view">
+    <div class="stack-s"><span class="eyebrow">Jag behöver hjälp</span><h1>${h.e} ${esc(h.t)}</h1><p class="lead">${esc(h.intro)}</p></div>
+    ${h.sos ? callouts({sos:h.sos}) : ''}
+    ${h.care ? callouts({care:h.care}) : ''}
+    ${h.ok ? callouts({ok:h.ok}) : ''}
+    ${contacts()}
+    ${h.id==='fel' ? `<div class="list">
+      <div class="row"><span class="ico">🩺</span><span class="row-b"><span class="row-t">BVC</span><span class="row-s">Frågor om barnets hälsa och utveckling – och om hur du själv mår</span></span></div>
+      <div class="row"><span class="ico">🧪</span><span class="row-b"><span class="row-t">Giftinformationscentralen · 010-456 67 00</span><span class="row-s">Om barnet har fått i sig något. Vid akut fara, ring 112.</span></span></div></div>` : ''}
+    <section class="stack"><h2>Läs mer</h2><div class="list">${arts.map(artRow).join('')}</div></section>
+    <p class="muted small">Informationen bygger på råd från 1177. Den ersätter inte en bedömning av vården.</p>
+  </div>`;
+};
+
+/* ----- Checklistor ----- */
+V.lists = () => {
+  const ai = ageInfo(activeChild()); const all = allLists();
+  const rel = all.filter(l=>ai && l.sec===ai.sec);
+  const own = all.filter(l=>!l.builtin);
+  const rest = all.filter(l=>l.builtin && !rel.includes(l));
+  return `<div class="view">
+    <div class="stack-s" style="padding-top:12px"><h1>Checklistor</h1><p class="lead">Bocka av, lägg till egna punkter och skapa egna listor. Allt sparas automatiskt.</p></div>
+    ${rel.length ? `<section class="stack"><h2>Aktuellt för ${esc(activeChild().name)}</h2><div class="grid2">${rel.map(listCard).join('')}</div></section>` : ''}
+    <section class="stack"><div class="sec-h"><h2>Mina egna listor</h2></div>
+      ${own.length ? `<div class="grid2">${own.map(listCard).join('')}</div>` : ''}
+      ${UI.newList ? `<form class="card" data-form="createList" style="padding:16px;display:flex;flex-direction:column;gap:12px">
+          <div class="field"><label for="nl-name">Namn på checklistan</label><input id="nl-name" name="name" placeholder="T.ex. Inskolning på förskolan" autocomplete="off" required maxlength="60"></div>
+          <div style="display:flex;gap:8px"><button class="btn" type="submit">Skapa</button><button class="btn ghost" type="button" data-act="cancelNewList">Avbryt</button></div></form>`
+        : `<button class="btn line block" data-act="newList">${icon('plus',20)} Skapa egen checklista</button>`}
+    </section>
+    <section class="stack"><h2>Alla checklistor</h2><div class="list">${rest.map(l=>{const p=progress(l); return row({e:l.e, t:l.t, s:`${SEC(l.sec).id==='grav'?'Graviditet':SEC(l.sec).t} · ${p.d} av ${p.n} klara`, go:'list|'+l.id})}).join('')}</div></section>
+  </div>`;
+};
+V.list = r => {
+  const l = S.lists[r.a] || getList(r.a); if(!l) return V.lists();
+  const p = progress(l); const edit = !!UI.edit[l.id];
+  const groups = groupsOf(l);
+  const itemHtml = (it, idx, arr) => edit
+    ? `<div class="item"><button class="mini" data-act="move" data-dir="-1" data-id="${it.id}" aria-label="Flytta upp" ${idx===0?'disabled':''}>${icon('up',18)}</button><button class="mini" data-act="move" data-dir="1" data-id="${it.id}" aria-label="Flytta ned" ${idx===arr.length-1?'disabled':''}>${icon('down',18)}</button>
+        <input class="edit-in" id="e-${it.id}" data-edit="${it.id}" value="${esc(it.text)}" aria-label="Redigera punkt" maxlength="80">
+        <button class="mini del" data-act="delItem" data-id="${it.id}" aria-label="Ta bort ${esc(it.text)}">${icon('trash',18)}</button></div>`
+    : `<div class="item ${it.done?'done':''}"><button class="tgl" data-act="toggleItem" data-id="${it.id}" role="checkbox" aria-checked="${it.done}"><span class="chk">${icon('check',16)}</span><span class="txt">${esc(it.text)}</span></button></div>`;
+  const groupHtml = g => {
+    const arr = l.items.filter(i=>i.g===g);
+    const isOwn = g===OWN;
+    if(!arr.length && !isOwn) return '';
+    const d = arr.filter(i=>i.done).length;
+    return `<section class="stack-s"><div class="grp-h"><h2>${esc(isOwn && !l.builtin ? 'Punkter' : g)}</h2>${l.builtin ? (isOwn ? '<span class="badge peach">Du har lagt till</span>' : '<span class="badge">Rekommenderat</span>') : ''}</div>
+      <div class="list">${arr.map((it,i)=>itemHtml(it,i,arr)).join('')}
+      ${!arr.length ? `<div class="empty">${l.builtin ? 'Här hamnar det du lägger till själv – till exempel ”Min egen kudde”.' : 'Listan är tom. Lägg till din första punkt nedan.'}</div>` : ''}
+      ${isOwn ? `<form class="addf" data-form="addItem"><label class="sr" for="add-${l.id}">Lägg till egen punkt</label><input id="add-${l.id}" name="text" placeholder="Lägg till egen punkt…" autocomplete="off" maxlength="80"><button class="btn sm" type="submit" aria-label="Lägg till">${icon('plus',18)}</button></form>` : ''}
+      </div>${arr.length && !isOwn ? '' : ''}</section>`;
+  };
+  return `${topbar(l.t)}<div class="view">
+    <div class="cl-head">
+      <div class="cl-top"><span class="ico" style="width:52px;height:52px;font-size:1.6rem">${l.e}</span><div class="row-b"><h1 style="font-size:1.5rem">${esc(l.t)}</h1>${l.d?`<span class="row-s">${esc(l.d)}</span>`:''}</div></div>
+      <div class="stack-s"><div class="sec-h"><span class="cl-count">${p.d} av ${p.n} klara</span><span class="saved ${UI.pulse?'pulse':''}" id="savedFlag">${icon('check',14)} Sparas automatiskt</span></div>${progBar(p)}</div>
+      <div class="cl-actions">
+        <button class="btn sm ${edit?'':'ghost'}" data-act="editMode" aria-pressed="${edit}">${icon(edit?'check':'edit',18)} ${edit?'Klar':'Redigera'}</button>
+        ${!edit && p.d>0 ? `<button class="btn sm ghost" data-act="resetChecks">${icon('reset',18)} Avmarkera alla</button>` : ''}
+        ${edit && l.builtin ? `<button class="btn sm ghost" data-act="restoreList">${icon('reset',18)} Återställ rekommenderade</button>` : ''}
+        ${edit && !l.builtin ? `<button class="btn sm danger" data-act="deleteList">${icon('trash',18)} Ta bort listan</button>` : ''}
+      </div>
+      ${edit ? '<p class="hint">Ändra text direkt i fälten, flytta med pilarna eller ta bort punkter. Rekommenderade punkter kan återställas.</p>' : ''}
+    </div>
+    ${groups.map(groupHtml).join('')}
+  </div>`;
+};
+
+/* ----- Jämför ----- */
+V.compare = () => `<div class="view">
+  <div class="stack-s" style="padding-top:12px"><h1>Jämför</h1><p class="lead">Sakliga jämförelser av välkända märken. Vi säger inte vad som är bäst – du väljer vad som är viktigt för dig.</p></div>
+  ${transparency()}
+  <div class="cats">${COMPARE.map(c=>`<button class="cat" data-go="compareCat|${c.id}"><span class="ico">${c.e}</span><span class="row-b"><span class="row-t">${c.t}</span><span class="row-s">${c.items.length} produkter</span></span></button>`).join('')}</div>
+  <section class="stack"><div class="sec-h"><h2>Kommer snart</h2></div><div class="soon">${COMPARE_SOON.map(x=>`<span>${x}</span>`).join('')}</div></section>
+</div>`;
+function transparency(){ return `<div class="note"><span>🔍</span><span><b>Så jämför vi.</b> Ingen produkt är sponsrad och vi får ingen provision. Om det ändras märks det tydligt vid produkten. Priser och mått i prototypen är ungefärliga exempel – kontrollera alltid hos tillverkaren.</span></div>`; }
+function scored(c){
+  const needs = Object.keys(UI.needs[c.id]||{}).filter(k=>UI.needs[c.id][k]);
+  return {needs, items: c.items.map((p,i)=>({p, i, hit: needs.filter(n=>p.f.includes(n))})).sort((a,b)=> b.hit.length-a.hit.length || a.i-b.i)};
+}
+V.compareCat = r => {
+  const c = COMPARE.find(x=>x.id===r.a); const {needs, items} = scored(c);
+  const sel = UI.sel[c.id] || [];
+  return `${topbar(c.t)}<div class="view">
+    <div class="stack-s"><span class="eyebrow">Jämför</span><h1>${c.e} ${c.t}</h1></div>
+    <section class="stack"><h2>Vad är viktigt för dig?</h2><div class="chips" role="group" aria-label="Filtrera på behov">${c.needs.map(n=>`<button class="chip" data-act="toggleNeed" data-c="${c.id}" data-n="${n}" aria-pressed="${!!(UI.needs[c.id]||{})[n]}">${(UI.needs[c.id]||{})[n]?'✓ ':''}${NEEDS[n]}</button>`).join('')}</div>
+      <p class="muted small">${needs.length ? `Sorterat efter hur många av dina ${needs.length} behov som matchar.` : 'Välj ett eller flera behov så sorteras produkterna efter hur väl de matchar.'}</p></section>
+    <div class="stack">${items.map(({p,hit})=>{const on = sel.includes(p.id); return `<article class="card prod">
+      <div class="prod-h"><div class="row-b"><span class="brandname">${esc(p.b)}</span><h3>${esc(p.n)}</h3></div><span class="price">${esc(p.price)}</span></div>
+      ${needs.length ? `<div class="match">${needs.map(n=>p.f.includes(n)?`<span class="badge green">✓ ${NEEDS[n]}</span>`:`<span class="badge grey">${NEEDS[n]}</span>`).join('')}</div>` : ''}
+      <dl class="specs">${c.attrs.filter(a=>a[0]!=='price').map(a=>`<div><dt>${a[1]}</dt><dd>${esc(p[a[0]])}</dd></div>`).join('')}</dl>
+      <div class="pc"><div><b>Fördelar</b><ul>${p.pro.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div><div><b>Nackdelar</b><ul>${p.con.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div></div>
+      <button class="selbtn" data-act="toggleSel" data-c="${c.id}" data-id="${p.id}" role="checkbox" aria-checked="${on}"><span class="chk ${on?'on':''}">${icon('check',14)}</span>${on?'Vald för jämförelse':'Välj för jämförelse'}</button>
+    </article>`}).join('')}</div>
+    ${transparency()}
+    ${sel.length ? `<div class="cbar"><span>${sel.length} ${sel.length===1?'vald':'valda'} ${sel.length<2?'· välj minst 2':''}</span><button class="btn sm" data-act="clearSel" data-c="${c.id}" style="background:transparent;color:var(--bg)">Rensa</button>${sel.length>=2?`<button class="btn sm" data-go="compareTable|${c.id}">Jämför</button>`:''}</div><div style="height:64px" aria-hidden="true"></div>` : ''}
+  </div>`;
+};
+V.compareTable = r => {
+  const c = COMPARE.find(x=>x.id===r.a); const sel = (UI.sel[c.id]||[]).map(id=>c.items.find(p=>p.id===id));
+  const needs = Object.keys(UI.needs[c.id]||{}).filter(k=>UI.needs[c.id][k]);
+  return `${topbar('Jämför '+c.t.toLowerCase())}<div class="view">
+    <div class="stack-s"><span class="eyebrow">Jämför</span><h1>${sel.length} ${c.t.toLowerCase()} sida vid sida</h1><p class="muted small">Svep i sidled för att se alla.</p></div>
+    <div class="tbl-wrap"><table class="cmp"><thead><tr><th scope="row"></th>${sel.map(p=>`<th scope="col"><span class="brandname">${esc(p.b)}</span><br>${esc(p.n)}</th>`).join('')}</tr></thead><tbody>
+      ${c.attrs.map(a=>`<tr><th scope="row">${a[1]}</th>${sel.map(p=>`<td>${esc(p[a[0]])}</td>`).join('')}</tr>`).join('')}
+      ${needs.length?`<tr><th scope="row">Matchar dina behov</th>${sel.map(p=>`<td>${needs.filter(n=>p.f.includes(n)).map(n=>NEEDS[n]).join(', ')||'–'}</td>`).join('')}</tr>`:''}
+      <tr><th scope="row">Fördelar</th>${sel.map(p=>`<td><ul>${p.pro.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></td>`).join('')}</tr>
+      <tr><th scope="row">Nackdelar</th>${sel.map(p=>`<td><ul>${p.con.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></td>`).join('')}</tr>
+    </tbody></table></div>
+    ${transparency()}
+  </div>`;
+};
+
+/* ----- Recept ----- */
+function childMonths(){ const ai = ageInfo(activeChild()); return ai && ai.kind==='born' ? ai.months : null; }
+V.recipes = () => {
+  const m = childMonths(); const f = UI.rf;
+  const list = RECIPES.filter(x=>{
+    if(f.age && m!=null && x.age>m) return false;
+    if(f.snabb && x.min>15) return false; if(f.veg && !x.veg) return false; if(f.frys && !x.frys) return false; if(f.fa && x.ing.length>3) return false;
+    if(f.utanagg && x.al.includes('ägg')) return false; if(f.utanfisk && x.al.includes('fisk')) return false; if(f.utangluten && x.al.includes('gluten')) return false;
+    return true;
+  });
+  const keys = Object.keys(RFILTERS).filter(k=>k!=='age' || m!=null);
+  return `${topbar('Recept')}<div class="view">
+    <div class="stack-s"><span class="eyebrow">Mat · 0–1 år</span><h1>🥣 Recept för små barn</h1><p class="lead">Utan tillsatt salt. ${m!=null?`Visar recept som passar ${esc(activeChild().name)}, ${m} månader.`:'Välj filter för att hitta rätt.'}</p></div>
+    <div class="scroll-x" role="group" aria-label="Filter">${keys.map(k=>`<button class="chip" data-act="rf" data-k="${k}" aria-pressed="${!!f[k]}">${f[k]?'✓ ':''}${k==='age'?`Från ${m} mån`:RFILTERS[k]}</button>`).join('')}</div>
+    <p class="muted small">${list.length} ${list.length===1?'recept':'recept'}</p>
+    ${list.length ? `<div class="list">${list.map(x=>`<button class="row" data-go="recipe|${x.id}"><span class="ico">${x.e}</span><span class="row-b"><span class="row-t">${esc(x.t)}</span><span class="rmeta"><span class="badge grey">Från ${x.age} mån</span><span class="badge grey">${x.min} min</span>${x.veg?'<span class="badge green">Vegetariskt</span>':''}${x.frys?'<span class="badge">Kan frysas</span>':''}${x.al.map(a=>`<span class="badge peach">${a}</span>`).join('')}</span></span><span class="chev">${icon('chev',20)}</span></button>`).join('')}</div>`
+      : `<div class="note"><span>🥕</span><span><b>Inga recept matchar alla filter.</b> Prova att ta bort något filter.</span></div>`}
+    <div class="note"><span>📘</span><span>Råden om matintroduktion bygger på <b>Livsmedelsverket</b>. Recepten är exempel i prototypen.</span></div>
+  </div>`;
+};
+V.recipe = r => {
+  const x = RECIPES.find(y=>y.id===r.a);
+  return `${topbar(x.t)}<article class="view article">
+    <div class="stack-s"><span class="eyebrow">Recept</span><h1>${x.e} ${esc(x.t)}</h1>
+    <div class="meta"><span class="badge grey">Från ${x.age} mån</span><span class="badge grey">${icon('clock',14)} ${x.min} min</span>${x.veg?'<span class="badge green">Vegetariskt</span>':''}${x.frys?'<span class="badge">Kan frysas</span>':''}</div></div>
+    ${x.al.length?`<div class="callout care"><h3>Innehåller</h3><p>${x.al.join(', ')}. Introducera gärna en ny sak i taget.</p></div>`:''}
+    <div class="prose"><h2>Ingredienser</h2><ul>${x.ing.map(i=>`<li>${esc(i)}</li>`).join('')}</ul><h2>Gör så här</h2><ol>${x.steps.map(i=>`<li>${esc(i)}</li>`).join('')}</ol></div>
+    <div class="callout tip"><h3>💡 Tips</h3><p>${esc(x.tip)}</p></div>
+    <div class="list">${artRow('smakportioner')}${artRow('allergener')}</div>
+  </article>`;
+};
+
+/* ----- Sök ----- */
+const STOP = new Set('vad ska jag när kan mitt min mina till med och att det en ett har är hur ha på i om för som vilken vilket vilka passar börja barn barnet bebis bebisen bebisar man vi du får mig sig inte gör göra bör behöver the jättemycket mycket'.split(' '));
+const norm = s => s.toLowerCase().replace(/[^a-z0-9åäöéü]+/g,' ').trim();
+let INDEX = null;
+function buildIndex(){
+  const idx = [];
+  Object.values(ARTICLES).forEach(a=>idx.push({type:'Artiklar', e:a.e||'📄', t:a.title, s:artMeta(a).crumb, go:'article|'+a.id, title:norm(a.title), text:norm(a.tags+' '+a.ingress)}));
+  HELP.forEach(h=>idx.push({type:'Snabb hjälp', e:h.e, t:h.t, s:'Lugn vägledning och när du ska söka vård', go:'helpItem|'+h.id, title:norm(h.t), text:norm(h.k+' '+h.intro)}));
+  LIST_DEFS.forEach(d=>idx.push({type:'Checklistor', e:d.e, t:d.t, s:'Checklista', go:'list|'+d.id, title:norm(d.t), text:norm((d.id==='bb'?'bb bb väska packa förlossning ha med ':'')+Object.values(d.g).flat().join(' '))}));
+  COMPARE.forEach(c=>idx.push({type:'Jämför', e:c.e, t:c.t, s:'Jämför '+c.items.length+' produkter', go:'compareCat|'+c.id, title:norm(c.t), text:norm(c.k+' '+c.items.map(p=>p.b+' '+p.n+' '+p.f.map(f=>NEEDS[f]).join(' ')).join(' '))}));
+  RECIPES.forEach(x=>idx.push({type:'Recept', e:x.e, t:x.t, s:`Från ${x.age} mån · ${x.min} min`, go:'recipe|'+x.id, title:norm(x.t), text:norm('recept mat '+x.ing.join(' ')+' '+x.al.join(' '))}));
+  return idx;
+}
+function stem(t){ return t.length<=4 ? t : t.slice(0, Math.max(4, t.length-2)); }
+function wmatch(tok, words){ const st = stem(tok); return words.some(w => w.startsWith(st) || (w.length>=4 && tok.startsWith(w))); }
+function search(q){
+  INDEX = INDEX || buildIndex();
+  let toks = norm(q).split(' ').filter(Boolean);
+  const content = toks.filter(t=>!STOP.has(t) && t.length>=2);
+  if(content.length) toks = content;
+  if(!toks.length) return [];
+  return INDEX.map(e=>{
+    const tw = e.title.split(' '), xw = e.text.split(' ');
+    let sc = 0, hits = 0;
+    toks.forEach(t=>{ const inT = wmatch(t,tw), inX = wmatch(t,xw); if(inT||inX) hits++; sc += (inT?3:0) + (inX?1:0); });
+    if(hits < Math.min(toks.length, toks.length>2 ? 2 : 1)) sc = 0;
+    return {e, sc: sc + (hits===toks.length ? 2 : 0)};
+  }).filter(x=>x.sc>0).sort((a,b)=>b.sc-a.sc).map(x=>x.e);
+}
+const SUGG = ['Mitt barn bajsar grönt','Vad ska jag ha med till BB?','När kan bebis börja äta ägg?','Vilken bärsele passar nyfödd?','Feber','Sover dåligt'];
+function resultsHtml(){
+  const q = UI.q.trim();
+  if(!q) return `<section class="stack"><h2>Prova att söka på</h2><div class="chips">${SUGG.map(s=>`<button class="chip" data-act="sugg" data-q="${esc(s)}">${esc(s)}</button>`).join('')}</div></section>
+    <section class="stack"><h2>Eller välj direkt</h2><div class="list">${row({e:'🆘', t:'Jag behöver hjälp', s:'Lugn vägledning', go:'help'})}${row({e:'📚', t:'Utforska efter ålder', s:'Graviditet till 18 år', go:'explore'})}</div></section>`;
+  const res = search(q);
+  if(!res.length) return `<div class="note"><span>🔎</span><span><b>Inga träffar på ”${esc(q)}”.</b> Prova ett annat ord, till exempel ”sömn”, ”amning” eller ”bilstol”. Är du orolig för ditt barn – ring 1177.</span></div>`;
+  const order = [...new Set(res.map(x=>x.type))]; /* bästa träffens grupp visas först */
+  return `<p class="muted small">${res.length} träffar</p>` + order.map(t=>{ const g = res.filter(x=>x.type===t).slice(0,5); return g.length ? `<section class="rgrp"><span class="eyebrow">${t}</span><div class="list">${g.map(x=>row({e:x.e, t:x.t, s:x.s, go:x.go})).join('')}</div></section>` : ''; }).join('');
+}
+V.search = () => `${topbar('Sök')}<div class="view">
+  <form class="sfield" data-form="search" role="search">${icon('search')}<label class="sr" for="q">Sök</label><input id="q" type="search" value="${esc(UI.q)}" placeholder="Skriv din fråga…" autocomplete="off" enterkeyhint="search">${UI.q?`<button type="button" class="mini" data-act="clearQ" aria-label="Rensa">${icon('x',18)}</button>`:''}</form>
+  <div id="results" class="stack" style="gap:22px">${resultsHtml()}</div>
+</div>`;
+
+/* ----- Profil ----- */
+V.profile = () => {
+  return `<div class="view">
+    <div class="stack-s" style="padding-top:12px"><h1>Profil</h1><p class="lead">Din familj och dina inställningar.</p></div>
+    <section class="stack"><h2>Du</h2>
+      <form class="card" data-form="parent" style="padding:16px;display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap">
+        <div class="field" style="flex:1;min-width:180px"><label for="p-name">Ditt förnamn</label><input id="p-name" name="name" value="${esc(S.parent)}" placeholder="T.ex. Anna" maxlength="30" autocomplete="given-name"></div>
+        <button class="btn" type="submit">Spara</button></form></section>
+    <section class="stack"><div class="sec-h"><h2>Barn i familjen</h2></div>
+      <div class="list">${S.children.map(c=>{const ai=ageInfo(c); const on=c.id===S.active; return `<div class="row">
+        <span class="avatar" style="width:44px;height:44px">${c.type==='expecting'?'🤰':esc(c.name[0])}</span>
+        <span class="row-b"><span class="row-t">${esc(c.name)} ${on?'<span class="badge">Visas på Hem</span>':''}</span><span class="row-s">${c.type==='expecting'?`Väntar barn · ${esc(ai.label)}`:`${esc(ai.label)} · född ${fmtDate(c.date)}`}</span></span>
+        ${on?'':`<button class="btn sm ghost" data-act="setChild" data-id="${c.id}">Visa på Hem</button>`}
+        <button class="mini" data-go="childForm|${c.id}" aria-label="Redigera ${esc(c.name)}">${icon('edit',18)}</button></div>`}).join('') || '<div class="empty">Inga barn tillagda än.</div>'}</div>
+      <button class="btn line block" data-go="childForm">${icon('plus',20)} Lägg till barn</button></section>
+    <section class="stack"><h2>Om innehållet</h2><div class="note"><span>📘</span><span>Informationen om hälsa, graviditet, amning, mat och säkerhet bygger på svenska källor som <b>1177, Livsmedelsverket, Socialstyrelsen, Konsumentverket och Transportstyrelsen</b>. Varje artikel visar sin källa. Appen ställer inga diagnoser.</span></div></section>
+    <section class="stack"><h2>Inställningar</h2>
+      <div class="list">${row({e:'👋', t:'Visa introduktionen igen', go:'onboardingAgain'})}</div>
+      ${UI.confirmReset ? `<div class="confirm"><b>Rensa all data?</b><span class="small">Barn, checklistor och markeringar tas bort från den här enheten. Det går inte att ångra.</span><div style="display:flex;gap:8px"><button class="btn sm danger" data-act="resetAll">Ja, rensa</button><button class="btn sm ghost" data-act="cancelReset">Avbryt</button></div></div>`
+        : `<button class="btn ghost block" data-act="askReset">Rensa all data</button>`}
+      <p class="muted small">Dina uppgifter sparas bara på den här telefonen.</p>
+    </section>
+  </div>`;
+};
+
+/* ----- Barnformulär (delas av onboarding och profil) ----- */
+function childFormFields(c, submitLabel, extra){
+  const type = UI.childType || (c ? c.type : 'born');
+  return `<form data-form="child" class="stack" style="gap:18px" novalidate>
+    <div class="typesel" role="group" aria-label="Typ">
+      <button type="button" data-act="setType" data-t="born" aria-pressed="${type==='born'}"><span>👶</span>Barnet är fött</button>
+      <button type="button" data-act="setType" data-t="expecting" aria-pressed="${type==='expecting'}"><span>🤰</span>Vi väntar barn</button>
+    </div>
+    <div class="field"><label for="cf-name">${type==='expecting'?'Namn eller smeknamn':'Barnets namn'}</label><input id="cf-name" name="name" value="${esc(c?c.name:'')}" placeholder="${type==='expecting'?'T.ex. Bebis eller Lillen':'T.ex. Elsa'}" maxlength="30" autocomplete="off"></div>
+    <div class="field"><label for="cf-date">${type==='expecting'?'Beräknat förlossningsdatum':'Födelsedatum'}</label><input id="cf-date" name="date" type="date" value="${esc(c?c.date:'')}" ${type==='born'?`max="${isoToday()}"`:`min="${isoToday()}"`}>
+      <span class="hint">${type==='expecting'?'Vi visar graviditetsvecka och det som är aktuellt just nu.':'Startsidan anpassas automatiskt efter barnets ålder.'}</span></div>
+    ${UI.err?`<p class="err" role="alert">${esc(UI.err)}</p>`:''}
+    <button class="btn block" type="submit">${submitLabel}</button>${extra||''}
+  </form>`;
+}
+V.childForm = r => {
+  const c = r.a ? S.children.find(x=>x.id===r.a) : null;
+  return `${topbar(c?'Redigera barn':'Lägg till barn')}<div class="view">
+    <div class="stack-s"><h1>${c?'Redigera '+esc(c.name):'Lägg till barn'}</h1></div>
+    ${childFormFields(c, c?'Spara':'Lägg till', c?`<button type="button" class="btn danger block" data-act="deleteChild" data-id="${c.id}">Ta bort ${esc(c.name)}</button>`:'')}
+  </div>`;
+};
+
+/* ----- Onboarding ----- */
+function onboarding(){
+  const dots = n => `<div class="dots" aria-hidden="true">${[0,1,2].map(i=>`<i class="${i===n?'on':''}"></i>`).join('')}</div>`;
+  if(UI.ob===0) return `<div class="ob-wrap view">
+    <div class="ob-hero"><span class="ob-art"></span><span class="ob-art b"></span>${LOGO(44)}
+      <h1>Hjälp en förälder</h1><p class="lead" style="color:var(--text)">En trygg guide från graviditet till dess att barnet flyttar hemifrån.</p></div>
+    <div class="vp">
+      <div class="vp-i"><span class="ico">🧭</span><div class="row-b"><span class="row-t">Anpassat efter ditt barns ålder</span><span class="row-s">Det som är aktuellt just nu, på startsidan</span></div></div>
+      <div class="vp-i"><span class="ico">✅</span><div class="row-b"><span class="row-t">Checklistor du kan göra till dina egna</span><span class="row-s">BB-väskan, barnsäkring, flytta hemifrån</span></div></div>
+      <div class="vp-i"><span class="ico">📘</span><div class="row-b"><span class="row-t">Lugn information med tydliga källor</span><span class="row-s">1177, Livsmedelsverket och andra svenska myndigheter</span></div></div>
+    </div>
+    <div class="stack"><button class="btn block" data-act="obNext">Kom igång</button><button class="btn ghost block" data-act="obDemo">Titta runt med en exempelfamilj</button></div>
+  </div>`;
+  if(UI.ob===1) return `<div class="ob-wrap view">
+    <div class="stack-s">${dots(0)}<span class="eyebrow" style="margin-top:14px">Steg 1 av 2</span><h1>Vad heter du?</h1><p class="lead">Så kan vi hälsa på dig. Du kan hoppa över det här.</p></div>
+    <form data-form="obParent" class="stack" style="gap:18px"><div class="field"><label for="ob-name">Ditt förnamn</label><input id="ob-name" name="name" value="${esc(S.parent)}" placeholder="T.ex. Anna" maxlength="30" autocomplete="given-name"></div>
+      <button class="btn block" type="submit">Fortsätt</button><button class="btn ghost block" type="button" data-act="obBack">Tillbaka</button></form>
+  </div>`;
+  if(UI.ob===2) return `<div class="ob-wrap view">
+    <div class="stack-s">${dots(1)}<span class="eyebrow" style="margin-top:14px">Steg 2 av 2</span><h1>Berätta om ditt barn</h1><p class="lead">Du kan lägga till fler barn senare under Profil.</p></div>
+    ${childFormFields(null, 'Fortsätt', '<button class="btn ghost block" type="button" data-act="obBack">Tillbaka</button>')}
+  </div>`;
+  const c = activeChild(); const ai = ageInfo(c);
+  return `<div class="ob-wrap view">
+    <div class="stack-s">${dots(2)}</div>
+    <div class="ob-hero" style="background:var(${c.type==='expecting'?'--t-grav':SEC(ai.sec).tint})"><span class="ob-art"></span><span style="font-size:2.4rem">${c.type==='expecting'?'🤰':SEC(ai.sec).e}</span>
+      <h1>Klart${S.parent?', '+esc(S.parent):''}!</h1><p class="lead" style="color:var(--text)">Vi har anpassat appen för ${esc(c.name)}, ${esc(ai.kind==='grav'?'graviditetsvecka '+ai.week:ai.label)}.</p></div>
+    <button class="btn block" data-act="obDone">Till startsidan</button>
+  </div>`;
+}
+
+/* ---------------- ROUTER & RENDER ---------------- */
+const view = document.getElementById('view');
+function parseGo(s){ const [r,a,b,c] = s.split('|'); return {r, a, b, c}; }
+function render(scrollTop){
+  const ob = !S.onboarded;
+  document.body.classList.toggle('ob', ob);
+  if(ob){ view.innerHTML = onboarding(); window.scrollTo(0,0); return; }
+  const cur = stack[stack.length-1];
+  const fn = V[cur.r] || V.home;
+  view.innerHTML = fn(cur);
+  UI.pulse = false;
+  const root = stack[0].r;
+  document.querySelectorAll('.tab').forEach(t=>{ if(t.dataset.tab===root) t.setAttribute('aria-current','page'); else t.removeAttribute('aria-current'); });
+  document.title = 'Hjälp en förälder';
+  if(scrollTop === true) window.scrollTo(0,0); else if(typeof scrollTop === 'number') window.scrollTo(0, scrollTop);
+  if(cur.r==='search'){ const q = document.getElementById('q'); if(q){ q.focus({preventScroll:true}); q.setSelectionRange(q.value.length, q.value.length); } }
+}
+function go(s){
+  if(s==='onboardingAgain'){ S.onboarded=false; UI.ob=0; render(true); return; }
+  const r = parseGo(s);
+  if(['home','explore','lists','compare','profile'].includes(r.r) && !r.a){ stack = [{r:r.r}]; render(true); return; }
+  stack[stack.length-1].y = window.scrollY;
+  if(r.r==='childForm'){ UI.childType=null; UI.err=''; }
+  stack.push(r); render(true);
+}
+function back(){ if(stack.length>1){ stack.pop(); const y = stack[stack.length-1].y||0; render(y); } }
+function rerender(){ render(window.scrollY); }
+
+/* ---------------- TOAST ---------------- */
+let toastT;
+function toast(msg, actLabel, fn){
+  const t = document.getElementById('toast'), a = document.getElementById('toastAct');
+  document.getElementById('toastMsg').textContent = msg;
+  a.hidden = !actLabel; a.textContent = actLabel || ''; a.onclick = () => { t.classList.remove('show'); fn && fn(); };
+  t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(()=>t.classList.remove('show'), actLabel ? 5000 : 2200);
+}
+
+/* ---------------- HÄNDELSER ---------------- */
+document.querySelectorAll('.tab').forEach(t=>{ t.querySelector('.pill').innerHTML = icon(t.dataset.ic || t.querySelector('.pill').dataset.ic, 23); t.addEventListener('click', ()=>{ stack=[{r:t.dataset.tab}]; render(true); }); });
+document.getElementById('railLogo').innerHTML = LOGO(30);
+
+function curList(){ const cur = stack[stack.length-1]; return cur.r==='list' ? ensureList(cur.a) : null; }
+
+document.addEventListener('click', e=>{
+  const tg = e.target.closest('[data-tab-go]'); if(tg){ stack=[{r:tg.dataset.tabGo}]; render(true); return; }
+  const rep = e.target.closest('[data-go-replace]'); if(rep){ stack[stack.length-1] = parseGo(rep.dataset.goReplace); rerender(); return; }
+  const act = e.target.closest('[data-act]');
+  if(act){ handleAct(act.dataset.act, act, e); return; }
+  const g = e.target.closest('[data-go]'); if(g){ go(g.dataset.go); }
+});
+
+function handleAct(a, el){
+  const c = activeChild();
+  switch(a){
+    case 'back': back(); break;
+    case 'setChild': S.active = el.dataset.id; persist(); if(stack[0].r==='profile'){ rerender(); toast('Startsidan visar nu '+(S.children.find(x=>x.id===S.active)||{}).name); } else rerender(); break;
+    case 'toggleTodo': { const k = c.id+':'+el.dataset.id; S.todos[k] = !S.todos[k]; persist(); rerender(); break; }
+    case 'toggleItem': { const l = curList(); const it = l.items.find(i=>i.id===el.dataset.id); it.done = !it.done; persist(); rerender();
+      const p = progress(l); if(it.done && p.pct===100) toast('Allt klart i '+l.t+' 🎉'); break; }
+    case 'editMode': { const l = curList(); UI.edit[l.id] = !UI.edit[l.id]; rerender(); break; }
+    case 'resetChecks': { const l = curList(); const prev = l.items.map(i=>i.done); l.items.forEach(i=>i.done=false); persist(); rerender();
+      toast('Alla punkter avmarkerade', 'Ångra', ()=>{ l.items.forEach((i,k)=>i.done=prev[k]); persist(); rerender(); }); break; }
+    case 'restoreList': { const l = curList(); const fresh = makeList(LIST_DEFS.find(d=>d.id===l.id));
+      const doneMap = Object.fromEntries(l.items.map(i=>[i.id,i.done]));
+      const own = l.items.filter(i=>i.custom);
+      l.items = [...fresh.items.map(i=>({...i, done: doneMap[i.id]||false})), ...own]; persist(); rerender(); toast('Rekommenderade punkter återställda'); break; }
+    case 'deleteList': { const l = curList(); const snap = JSON.parse(JSON.stringify(l)); const pos = S.order.indexOf(l.id);
+      delete S.lists[l.id]; S.order = S.order.filter(x=>x!==l.id); persist(); stack.pop(); rerender();
+      toast('Listan togs bort', 'Ångra', ()=>{ S.lists[snap.id]=snap; S.order.splice(pos<0?S.order.length:pos,0,snap.id); persist(); rerender(); }); break; }
+    case 'move': { const l = curList(); const it = l.items.find(i=>i.id===el.dataset.id); const grp = l.items.filter(i=>i.g===it.g);
+      const gi = grp.indexOf(it), ni = gi + (+el.dataset.dir); if(ni<0||ni>=grp.length) break;
+      const other = grp[ni]; const a1 = l.items.indexOf(it), a2 = l.items.indexOf(other); [l.items[a1], l.items[a2]] = [l.items[a2], l.items[a1]];
+      persist(); rerender(); const btn = view.querySelector(`[data-act="move"][data-dir="${el.dataset.dir}"][data-id="${it.id}"]`); btn && !btn.disabled && btn.focus(); break; }
+    case 'delItem': { const l = curList(); const idx = l.items.findIndex(i=>i.id===el.dataset.id); const [it] = l.items.splice(idx,1); persist(); rerender();
+      toast('”'+it.text+'” togs bort', 'Ångra', ()=>{ l.items.splice(idx,0,it); persist(); rerender(); }); break; }
+    case 'newList': UI.newList = true; rerender(); setTimeout(()=>{const i=document.getElementById('nl-name'); i&&i.focus();},30); break;
+    case 'cancelNewList': UI.newList = false; rerender(); break;
+    case 'toggleNeed': { const n = UI.needs[el.dataset.c] = UI.needs[el.dataset.c] || {}; n[el.dataset.n] = !n[el.dataset.n]; rerender(); break; }
+    case 'toggleSel': { const s = UI.sel[el.dataset.c] = UI.sel[el.dataset.c] || []; const i = s.indexOf(el.dataset.id);
+      if(i>=0) s.splice(i,1); else { if(s.length>=3){ toast('Du kan jämföra högst 3 åt gången'); break; } s.push(el.dataset.id); } rerender(); break; }
+    case 'clearSel': UI.sel[el.dataset.c] = []; rerender(); break;
+    case 'rf': UI.rf[el.dataset.k] = !UI.rf[el.dataset.k]; rerender(); break;
+    case 'sugg': UI.q = el.dataset.q; rerender(); break;
+    case 'clearQ': UI.q = ''; rerender(); break;
+    case 'setType': { UI.childType = el.dataset.t; UI.err=''; const nm = document.getElementById('cf-name'); const keep = nm ? nm.value : ''; rerenderAny(); const n2 = document.getElementById('cf-name'); if(n2) n2.value = keep; break; }
+    case 'deleteChild': { const id = el.dataset.id; const snap = S.children.find(x=>x.id===id); const pos = S.children.indexOf(snap);
+      S.children = S.children.filter(x=>x.id!==id); if(S.active===id) S.active = S.children[0] ? S.children[0].id : null; persist(); back();
+      toast(snap.name+' togs bort', 'Ångra', ()=>{ S.children.splice(pos,0,snap); if(!S.active) S.active=snap.id; persist(); rerender(); }); break; }
+    case 'askReset': UI.confirmReset = true; rerender(); break;
+    case 'cancelReset': UI.confirmReset = false; rerender(); break;
+    case 'resetAll': S = blankState(); try{localStorage.removeItem(KEY)}catch(e){} UI.confirmReset=false; UI.ob=0; stack=[{r:'home'}]; render(true); break;
+    case 'obNext': UI.ob = 1; render(true); break;
+    case 'obBack': UI.ob = Math.max(0, UI.ob-1); UI.err=''; render(true); break;
+    case 'obDemo': S = demoState(); persist(); stack=[{r:'home'}]; render(true); toast('Du tittar på exempelfamiljen Anna, Elsa och Leo'); break;
+    case 'obDone': S.onboarded = true; persist(); stack=[{r:'home'}]; render(true); break;
+  }
+}
+function rerenderAny(){ if(!S.onboarded){ view.innerHTML = onboarding(); } else rerender(); }
+
+document.addEventListener('submit', e=>{
+  const f = e.target.closest('[data-form]'); if(!f) return; e.preventDefault();
+  const t = f.dataset.form, fd = new FormData(f);
+  if(t==='addItem'){ const text = (fd.get('text')||'').toString().trim(); if(!text) return; const l = curList();
+    l.items.push({id:uid('c'), text, done:false, custom:true, g:OWN}); persist(); rerender();
+    const inp = document.getElementById('add-'+l.id); inp && inp.focus({preventScroll:true}); toast('”'+text+'” lades till under '+(l.builtin?OWN:'punkter')); }
+  if(t==='createList'){ const name = (fd.get('name')||'').toString().trim(); if(!name) return; const id = uid('eget-');
+    S.lists[id] = {id, e:'📝', t:name, sec:null, builtin:false, items:[]}; S.order.push(id); UI.newList=false; UI.edit[id]=false; persist(); go('list|'+id);
+    setTimeout(()=>{const i=document.getElementById('add-'+id); i&&i.focus();},30); }
+  if(t==='parent'){ S.parent = (fd.get('name')||'').toString().trim(); persist(); rerender(); toast('Sparat'); }
+  if(t==='obParent'){ S.parent = (fd.get('name')||'').toString().trim(); UI.ob = 2; UI.childType=null; UI.err=''; render(true); }
+  if(t==='child'){
+    const name = (fd.get('name')||'').toString().trim(), date = (fd.get('date')||'').toString();
+    const cur = stack[stack.length-1]; const editing = S.onboarded && cur.r==='childForm' && cur.a ? S.children.find(x=>x.id===cur.a) : null;
+    const type = UI.childType || (editing ? editing.type : 'born');
+    if(!name){ UI.err = 'Skriv ett namn eller smeknamn.'; return rerenderKeep(name, date); }
+    if(!date){ UI.err = type==='born' ? 'Välj barnets födelsedatum.' : 'Välj beräknat förlossningsdatum.'; return rerenderKeep(name, date); }
+    if(type==='born' && date > isoToday()){ UI.err = 'Födelsedatumet kan inte vara i framtiden. Väntar ni barn? Välj ”Vi väntar barn”.'; return rerenderKeep(name, date); }
+    if(type==='expecting' && date < isoToday()){ UI.err = 'Beräknat datum har redan passerat. Är barnet fött? Välj ”Barnet är fött”.'; return rerenderKeep(name, date); }
+    UI.err='';
+    if(editing){ Object.assign(editing, {name, date, type}); persist(); back(); toast('Sparat'); return; }
+    const c = {id:uid('k'), name, date, type}; S.children.push(c); S.active = c.id; persist();
+    if(!S.onboarded){ UI.ob = 3; render(true); } else { stack=[{r:'home'}]; render(true); toast(name+' är tillagd'); }
+  }
+});
+function rerenderKeep(name, date){ rerenderAny(); const n = document.getElementById('cf-name'), d = document.getElementById('cf-date'); if(n) n.value = name; if(d) d.value = date; }
+
+document.addEventListener('input', e=>{
+  if(e.target.id==='q'){ UI.q = e.target.value; const r = document.getElementById('results'); if(r) r.innerHTML = resultsHtml(); }
+});
+document.addEventListener('change', e=>{
+  const id = e.target.dataset && e.target.dataset.edit; if(!id) return;
+  const l = curList(); const it = l.items.find(i=>i.id===id); const v = e.target.value.trim();
+  if(v){ it.text = v; persist(); } else e.target.value = it.text;
+});
+document.addEventListener('keydown', e=>{ if(e.key==='Enter' && e.target.dataset && e.target.dataset.edit){ e.preventDefault(); e.target.blur(); } });
+
+/* Android: telefonens tillbaka-knapp */
+window.appBack = function(){
+  if(!S.onboarded){ if(UI.ob>0 && UI.ob<3){ UI.ob--; UI.err=''; render(true); return true; } return false; }
+  if(stack.length>1){ back(); return true; }
+  if(stack[0].r!=='home'){ stack=[{r:'home'}]; render(true); return true; }
+  return false;
+};
+render(true);
+</script>
+
+</body>
+</html>
